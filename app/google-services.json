@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "755747909496",
+    "project_id": "politicalempathy-54fcd",
+    "storage_bucket": "politicalempathy-54fcd.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:755747909496:android:a1312fcb2f8c94a54ae28d",
+        "android_client_info": {
+          "package_name": "io.politicalempathy"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "755747909496-lbml7uqvinbh6e12paulnqhb81f49f7o.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "io.politicalempathy",
+            "certificate_hash": "831605d5228d0a9c035b3db6e4fc1959c81d3a8c"
+          }
+        },
+        {
+          "client_id": "755747909496-h6mtfg0ms39log5ub4qosepc8slri44i.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA3bju7P2nK0UJJc9OmVcWTk7-lWzaym7o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "755747909496-h6mtfg0ms39log5ub4qosepc8slri44i.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

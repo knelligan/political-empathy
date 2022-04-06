@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".LoginActivity">
+
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="180dp"
+        android:layout_marginBottom="25dp"
+        android:background="@drawable/redvblue"
+        android:fontFamily="@font/barlowboldx"
+        android:paddingVertical="60dp"
+        android:shadowColor="@color/black"
+        android:shadowDx="5"
+        android:shadowDy="5"
+        android:shadowRadius="25"
+        android:text="@string/logintextforbutton"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="40sp" />
+
+    <TextView
+        android:id="@+id/useremailtext"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="30dp"
+        android:text="@string/user_emailtextdescription"
+        android:textColor="@color/pink"
+        android:textSize="20sp" />
+
+    <EditText
+        android:id="@+id/loginemailentryid"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="30dp"
+        android:layout_marginBottom="30dp"
+        android:autofillHints=""
+        android:backgroundTint="@color/medgray"
+        android:hint="@string/common_signin_button_text"
+        android:inputType="textEmailAddress"
+        android:minHeight="48dp"
+        android:textColorHint="#757575"
+        tools:ignore="TextContrastCheck" />
+
+    <TextView
+        android:id="@+id/passwordtext"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="30dp"
+        android:text="@string/passwordtextdescription"
+        android:textColor="@color/pink"
+        android:textSize="20sp" />
+
+    <EditText
+        android:id="@+id/loginpasswordentryid"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="30dp"
+        android:layout_marginBottom="30dp"
+        android:autofillHints=""
+        android:backgroundTint="@color/medgray"
+        android:hint="@string/prompt_password"
+        android:inputType="textPassword"
+        android:minHeight="48dp"
+        android:textColorHint="#757575"
+        tools:ignore="TextContrastCheck" />
+
+
+
+    <Button
+        android:id="@+id/loginbuttonid"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="30dp"
+        android:layout_marginBottom="25dp"
+        android:backgroundTint="@color/design_default_color_primary"
+        android:text="@string/loginbutton"
+        android:textSize="20sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="195dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/registeroption"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="50dp"
+            android:paddingHorizontal="40dp"
+            android:text="@string/registeroption"
+            android:textAlignment="center"
+            android:textColor="@color/design_default_color_primary"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/forgotpasswordoption"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="40dp"
+            android:text="@string/forgot_password_option"
+            android:textAlignment="center"
+            android:textColor="@color/design_default_color_primary"
+            android:textSize="15sp" />
+    </LinearLayout>
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="?android:attr/windowBackground"
+        android:backgroundTint="@color/design_default_color_primary"
+        app:itemIconTint="#fff"
+        app:itemTextColor="#fff"
+        app:labelVisibilityMode="labeled"
+        app:menu="@menu/navigation_menu"
+        app:showAsAction="ifRoom" />
+
+</LinearLayout>

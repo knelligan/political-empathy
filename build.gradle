@@ -1,0 +1,55 @@
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+
+
+
+
+buildscript {
+
+    //original------------------------------------------------------------------------
+//    plugins {
+//        id 'com.android.application' version '7.1.1' apply false
+//        id 'com.android.library' version '7.1.1' apply false
+//    }
+//    task clean(type: Delete) {
+//        delete rootProject.buildDir
+//    }
+
+
+    repositories {
+        // needed for firebase
+        google()  // Google's Maven repository
+
+        mavenLocal()
+        mavenCentral()
+
+    }
+    dependencies {
+        // needed for firebase
+        classpath 'com.google.gms:google-services:4.3.10'
+        classpath 'com.android.tools.build:gradle:7.1.1'
+
+        classpath 'org.jetbrains.kotlin:kotlin-gradle-plugin:1.5.30'
+    }
+
+}
+
+allprojects {
+    repositories {
+        // needed for firebase
+        google()  // Google's Maven repository
+
+        mavenLocal()
+        mavenCentral()
+    }
+
+}
+
+//original------------------------------------------------------------------------
+//    plugins {
+//        id 'com.android.application' version '7.1.1' apply false
+//        id 'com.android.library' version '7.1.1' apply false
+//    }
+    task clean(type: Delete) {
+        delete rootProject.buildDir
+    }
+

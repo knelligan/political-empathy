@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/border"
+    tools:context=".MainMenuActivity">
+
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="409dp"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.001"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="654dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.466"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar"
+        app:layout_constraintVertical_bias="0.0">
+
+        <TextView
+            android:id="@+id/quote_quiz_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:gravity="center"
+            android:textSize="20sp"
+            android:text="@string/take_the_political_quote_quiz_to_assess_your_political_views"
+            app:layout_constraintBottom_toTopOf="@+id/quote_quiz_button"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/quote_quiz_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:layout_marginTop="116dp"
+            android:backgroundTint="@color/teal_700"
+            android:elevation="3dp"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="8dp"
+            android:text="@string/start_quote_quiz"
+
+            android:textSize="18sp"
+            tools:ignore="TextContrastCheck" />
+
+        <TextView
+            android:id="@+id/tolerance_quiz_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
+            android:gravity="center"
+            android:padding="8dp"
+            android:text="@string/take_the_political_tolerance_quiz_to_understand_your_open_mindedness"
+            android:textSize="20sp" />
+
+        <Button
+            android:id="@+id/tolerance_quiz_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#B2387E"
+            android:layout_margin="16dp"
+            android:layout_marginTop="116dp"
+            android:textSize="18sp"
+            android:padding="8dp"
+            android:gravity="center"
+            android:text="@string/start_tolerance_quiz" />
+
+        <TextView
+            android:id="@+id/resources_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
+            android:gravity="center"
+            android:padding="8dp"
+            android:text="@string/resources_to_improve_open_mindedness_and_deal_with_political_intolerance"
+            android:textSize="20sp" />
+
+        <Button
+            android:id="@+id/resources_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#522E86"
+            android:layout_margin="16dp"
+            android:textSize="18sp"
+            android:gravity="center"
+            android:padding="8dp"
+            android:text="@string/view_resources" />
+
+        <Button
+            android:id="@+id/mainmenu_logout_button"
+            android:layout_width="130dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:backgroundTint="@color/black"
+            android:gravity="center"
+            android:padding="8dp"
+            android:text="@string/log_out_main_menu"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="@+id/resources_button"
+
+            app:layout_constraintStart_toStartOf="parent" />
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
