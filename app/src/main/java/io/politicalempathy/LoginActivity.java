@@ -120,10 +120,27 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 if (task.isSuccessful()) {
                     //check if user has verified their email address
                     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-                    if(user.isEmailVerified()){
+                    if (user.isEmailVerified()) {
+                        //tell user they were successfully logged in
                         Toast.makeText(LoginActivity.this, "User successfully logged in!", Toast.LENGTH_LONG).show();
-                        startActivity(new Intent(LoginActivity.this, MainMenuActivity.class));
-                    }else{
+
+                        //load the questions into the question list
+                        DbQuery.loadQuotes(new CompleteListener() {
+                            @Override
+                            public void onSuccess() {
+                                //move to the main menu activity
+                                startActivity(new Intent(LoginActivity.this, MainMenuActivity.class));
+                            }
+
+                            @Override
+                            public void onFailure() {
+                                //let user know the task failed
+                                Toast.makeText(LoginActivity.this, "Something went wrong. Try again.",Toast.LENGTH_SHORT).show();
+                            }
+                        });
+
+
+                    } else {
                         //if it hasn't been verified, send a verification email
                         user.sendEmailVerification();
                         Toast.makeText(LoginActivity.this, "Verify your account (check your email)", Toast.LENGTH_LONG).show();

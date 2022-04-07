@@ -22,7 +22,7 @@ public class QuoteActivity extends AppCompatActivity implements View.OnClickList
     private Button stronglyAgree, somewhatAgree, somewhatDisagree, stronglyDisagree;
 
     //list of all quotes used in the program------------------------------------------replace this reference with global variable
-    private List<Quote> quoteList;
+    //private List<Quote> quoteList;
 
     //current number of the quote being displayed in the series
     private int quoteCounter;
@@ -58,20 +58,22 @@ public class QuoteActivity extends AppCompatActivity implements View.OnClickList
     }
 
     private void getQuotesList() {
-        quoteList = new ArrayList<>();
+        //quoteList = new ArrayList<>();
 
-        quoteList.add(new Quote("Quote 1", "Quote a", "Economic", "Author", "Left", 10));
-        quoteList.add(new Quote("Quote 2", "Quote b", "Economic", "Author", "Left", -10));
-        quoteList.add(new Quote("Quote 3", "Quote c", "Economic", "Author", "Right", 10));
-        quoteList.add(new Quote("Quote 4", "Quote d", "Economic", "Author", "Left", -10));
-        quoteList.add(new Quote("Quote 5", "Quote e", "Economic", "Author", "Right", 10));
+//        quoteList.add(new Quote("Quote 1", "Quote a", "Economic", "Author", "Left", 10));
+//        quoteList.add(new Quote("Quote 2", "Quote b", "Economic", "Author", "Left", -10));
+//        quoteList.add(new Quote("Quote 3", "Quote c", "Economic", "Author", "Right", 10));
+//        quoteList.add(new Quote("Quote 4", "Quote d", "Economic", "Author", "Left", -10));
+//        quoteList.add(new Quote("Quote 5", "Quote e", "Economic", "Author", "Right", 10));
 
         setQuote();
     }
 
     private void setQuote() {
-        quoteNum.setText(quoteList.get(0).getQuoteID());
-        quoteText.setText(quoteList.get(0).getQuoteText());
+//        quoteNum.setText(quoteList.get(0).getQuoteID());
+//        quoteText.setText(quoteList.get(0).getQuoteText());
+        quoteNum.setText(DbQuery.globalQuoteList.get(0).getQuoteID());
+        quoteText.setText(DbQuery.globalQuoteList.get(0).getQuoteText());
 
         //initialize quote counter
         quoteCounter = 0;
@@ -117,7 +119,8 @@ public class QuoteActivity extends AppCompatActivity implements View.OnClickList
     }
 
     private void nextQuote() {
-        if (quoteCounter < quoteList.size() - 1) {
+        //if (quoteCounter < quoteList.size() - 1) {
+        if (quoteCounter < DbQuery.globalQuoteList.size() - 1) {
 
             //update the quote number
             quoteCounter++;
@@ -125,19 +128,20 @@ public class QuoteActivity extends AppCompatActivity implements View.OnClickList
             //create animation that changes question---------------------------///researching now
             //quote text  // option 1, 0????// stronglyagree,  0
             //animate the quote changing
-           // nextQuoteAnimation(quoteText, 0, 0);
+            // nextQuoteAnimation(quoteText, 0, 0);
 
             //animate each of the categories changing
-           // nextQuoteAnimation(stronglyAgree, 0, 1);
-           // nextQuoteAnimation(somewhatAgree, 0, 2);
-           // nextQuoteAnimation(somewhatDisagree, 0, 3);
-           // nextQuoteAnimation(stronglyDisagree, 0, 4);
+            // nextQuoteAnimation(stronglyAgree, 0, 1);
+            // nextQuoteAnimation(somewhatAgree, 0, 2);
+            // nextQuoteAnimation(somewhatDisagree, 0, 3);
+            // nextQuoteAnimation(stronglyDisagree, 0, 4);
 
             //update the quote number at the top
             quoteNum.setText("Quote " + String.valueOf(quoteCounter + 1));
 
             //update quote text
-            quoteText.setText(quoteList.get(quoteCounter).getQuoteText());
+            //quoteText.setText(quoteList.get(quoteCounter).getQuoteText());
+            quoteText.setText(DbQuery.globalQuoteList.get(quoteCounter).getQuoteText());
 
         } else {
             // Go to calculations of political compass
@@ -149,7 +153,7 @@ public class QuoteActivity extends AppCompatActivity implements View.OnClickList
         }
     }
 
-//    private void nextQuoteAnimation(View view, final int value, int viewNum) {
+    //    private void nextQuoteAnimation(View view, final int value, int viewNum) {
 //        view.animate().alpha(value).scaleX(value).scaleY(value).setDuration(500)
 //                .setStartDelay(100).setInterpolator(new DecelerateInterpolator())
 //                .setListener(new Animator.AnimatorListener() {
@@ -199,7 +203,7 @@ public class QuoteActivity extends AppCompatActivity implements View.OnClickList
 //                });
 //    }
     @Override
-    public void onBackPressed(){
+    public void onBackPressed() {
 
     }
 }
