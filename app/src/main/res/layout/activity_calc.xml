@@ -6,4 +6,76 @@
     android:layout_height="match_parent"
     tools:context=".CalcActivity">
 
+    <LinearLayout
+        android:id="@+id/linearLayoutcalc"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="1dp"
+
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/finalscore_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="8dp"
+            android:text="Final Results"
+            android:textColor="@color/white"
+            android:background="@color/design_default_color_primary"
+            android:textSize="22sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/economic_bias_score"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="left"
+            android:padding="8dp"
+            android:text="Economic Bias:  -2"
+            android:textColor="@color/design_default_color_primary"
+            android:textSize="22sp"
+            android:textStyle="bold" />
+        <TextView
+            android:id="@+id/social_bias_score"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="left"
+            android:padding="8dp"
+            android:text="Social Bias:         -3"
+            android:textColor="@color/design_default_color_primary"
+            android:textSize="22sp"
+            android:textStyle="bold" />
+
+
+    </LinearLayout>
+
+
+
+
+
+    <ImageView
+        android:id="@+id/politicalchart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="politicalcompass"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayoutcalc"
+        app:srcCompat="@drawable/politicalcompass"
+        tools:ignore="ImageContrastCheck" />
+
+    <SurfaceView
+        android:id="@+id/surfaceView"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/politicalchart"
+        app:layout_constraintStart_toStartOf="@+id/politicalchart"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayoutcalc" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
