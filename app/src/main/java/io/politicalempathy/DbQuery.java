@@ -25,6 +25,9 @@ public class DbQuery {
     /* Global variable for the quotes list */
     public static List<Quote> globalQuoteList = new ArrayList<>();
 
+    /* Global variable for the responses list */
+    public static List<Quote> globalResponseList = new ArrayList<>();
+
 
     public static void createUserData(String email, String name, CompleteListener cl) {
         //researched here: https://firebase.google.com/docs/firestore/manage-data/transactions
@@ -53,7 +56,7 @@ public class DbQuery {
         //set the value for user
         batch.set(userDocument, userData);
 
-        //update count
+        //update count of users
         DocumentReference countDocument = globalFirestore.collection("USERS").document("TOTAL_USERS");
         batch.update(countDocument, "COUNT", FieldValue.increment(1));
 
@@ -87,7 +90,7 @@ public class DbQuery {
                         Map<String, QueryDocumentSnapshot> documentList = new ArrayMap<>();
 
                         //add each document to the map
-                        for(QueryDocumentSnapshot document : queryDocumentSnapshots){
+                        for (QueryDocumentSnapshot document : queryDocumentSnapshots) {
                             //put the document id and the document in the map as a key/value pair
                             documentList.put(document.getId(), document);
                         }
@@ -99,7 +102,7 @@ public class DbQuery {
 
                         //loop through all the documents in the firestore database
                         //update fields to include on the quote list
-                        for(int i = 1; i <= quoteCount; i++){
+                        for (int i = 1; i <= quoteCount; i++) {
                             //(new Quote("Quote 1", "Quote a", "Economic", "Author", "Left", 10));
 
                             //get the quote id value
@@ -141,10 +144,70 @@ public class DbQuery {
                 });
 
 
-
     }
 
+    public static void addResponse(CompleteListener completeListener) {
 
+        //load quotes from db
+        globalFirestore.collection("QUOTES").get()
+                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                    @Override
+                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                        //if successful, create a map to store documents retrieved from firebase
+                        Map<String, QueryDocumentSnapshot> documentList = new ArrayMap<>();
 
+                        //add each document to the map
+                        for (QueryDocumentSnapshot document : queryDocumentSnapshots) {
+                            //put the document id and the document in the map as a key/value pair
+                            documentList.put(document.getId(), document);
+                        }
+                        //get each listing of the quotes/id
+                        QueryDocumentSnapshot quoteListDocument = documentList.get("NUM_QUOTES");
 
+                        //store the total count of quotes in firebase
+                        long quoteCount = quoteListDocument.getLong("COUNT");
+
+                        //loop through all the documents in the firestore database
+                        //update fields to include on the quote list
+                        for (int i = 1; i <= quoteCount; i++) {
+                            //(new Quote("Quote 1", "Quote a", "Economic", "Author", "Left", 10));
+
+                            //get the quote id value
+                            String quoteID = quoteListDocument.getString("QUOTE" + String.valueOf(i) + "_ID");
+
+                            //get the actual quote document retrieved from firebase
+                            QueryDocumentSnapshot quoteDocument = documentList.get(quoteID);
+
+                            //now get all of the values to add to the quote class fields
+
+                            //name of author
+                            String author = quoteDocument.getString("AUTHOR");
+
+                            //Get bias
+                            String bias = quoteDocument.getString("BIAS");
+
+                            //get quote text
+                            String quoteText = quoteDocument.getString("QUOTE_TEXT");
+
+                            //get the number value of the quote
+                            int value = quoteDocument.getLong("QUOTE_VALUE").intValue();
+
+                            //get quote type
+                            String type = quoteDocument.getString("TYPE");
+
+                            //add a new quote with these fields to the quotes list
+                            globalQuoteList.add(new Quote("Quote " + i, quoteText, type, author, bias, value));
+                        }
+                        //invoke the complete listener interface based on a successful access of the database
+                        completeListener.onSuccess();
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        //invoke the complete listener interface based on a failure to access the database properly
+                        completeListener.onFailure();
+                    }
+                });
+    }
 }

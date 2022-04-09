@@ -129,7 +129,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             @Override
                             public void onSuccess() {
                                 //move to the main menu activity
-                                startActivity(new Intent(LoginActivity.this, MainMenuActivity.class));
+                                //startActivity(new Intent(LoginActivity.this, MainMenuActivity.class));
+                                startActivity(new Intent(LoginActivity.this, QuoteActivity.class));
                             }
 
                             @Override
@@ -157,29 +158,3 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
 }
 
-//        //create variable to access  button
-//        login = findViewById((R.id.loginbuttonid));
-//
-//        //set the action for clicking the start button
-//        login.setOnClickListener(new View.OnClickListener() {
-
-//            @Override
-//            public void onClick(View view) {
-//                Intent intent = new Intent(LoginActivity.this, QuoteActivity.class);
-//                startActivity(intent);
-//            }
-//        });
-//
-//
-//    }
-
-//        @Override
-//        public void onClick (View view){
-//            switch (view.getId()) {
-//                case R.id.registeroption:
-//                    startActivity(new Intent(LoginActivity.this, RegisterUserActivity.class));
-//                    break;
-//
-//            }
-//        }
-//    }

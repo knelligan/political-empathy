@@ -52,26 +52,15 @@ public class QuoteActivity extends AppCompatActivity implements View.OnClickList
         somewhatDisagree.setOnClickListener(this);
         stronglyDisagree.setOnClickListener(this);
 
-        //call the quotes method to load quotes to quote activity.
-        getQuotesList();
-
-    }
-
-    private void getQuotesList() {
-        //quoteList = new ArrayList<>();
-
-//        quoteList.add(new Quote("Quote 1", "Quote a", "Economic", "Author", "Left", 10));
-//        quoteList.add(new Quote("Quote 2", "Quote b", "Economic", "Author", "Left", -10));
-//        quoteList.add(new Quote("Quote 3", "Quote c", "Economic", "Author", "Right", 10));
-//        quoteList.add(new Quote("Quote 4", "Quote d", "Economic", "Author", "Left", -10));
-//        quoteList.add(new Quote("Quote 5", "Quote e", "Economic", "Author", "Right", 10));
-
+        //load quotes to quote activity.
+        //getQuotesList();
         setQuote();
+
     }
+
 
     private void setQuote() {
-//        quoteNum.setText(quoteList.get(0).getQuoteID());
-//        quoteText.setText(quoteList.get(0).getQuoteText());
+
         quoteNum.setText(DbQuery.globalQuoteList.get(0).getQuoteID());
         quoteText.setText(DbQuery.globalQuoteList.get(0).getQuoteText());
 
@@ -106,6 +95,12 @@ public class QuoteActivity extends AppCompatActivity implements View.OnClickList
         //save the value in the file
         //-------------------------------------------------------fix later
 
+        //ths is how it would work
+        //DbQuery.globalQuoteList.get(quoteCounter).
+
+
+
+        //creates a small delay after selction
         Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             @Override
@@ -118,23 +113,16 @@ public class QuoteActivity extends AppCompatActivity implements View.OnClickList
         nextQuote();
     }
 
+    private void setData(int questionNumber){
+
+    }
+
     private void nextQuote() {
         //if (quoteCounter < quoteList.size() - 1) {
         if (quoteCounter < DbQuery.globalQuoteList.size() - 1) {
 
             //update the quote number
             quoteCounter++;
-
-            //create animation that changes question---------------------------///researching now
-            //quote text  // option 1, 0????// stronglyagree,  0
-            //animate the quote changing
-            // nextQuoteAnimation(quoteText, 0, 0);
-
-            //animate each of the categories changing
-            // nextQuoteAnimation(stronglyAgree, 0, 1);
-            // nextQuoteAnimation(somewhatAgree, 0, 2);
-            // nextQuoteAnimation(somewhatDisagree, 0, 3);
-            // nextQuoteAnimation(stronglyDisagree, 0, 4);
 
             //update the quote number at the top
             quoteNum.setText("Quote " + String.valueOf(quoteCounter + 1));
@@ -153,55 +141,6 @@ public class QuoteActivity extends AppCompatActivity implements View.OnClickList
         }
     }
 
-    //    private void nextQuoteAnimation(View view, final int value, int viewNum) {
-//        view.animate().alpha(value).scaleX(value).scaleY(value).setDuration(500)
-//                .setStartDelay(100).setInterpolator(new DecelerateInterpolator())
-//                .setListener(new Animator.AnimatorListener() {
-//
-//                    @Override
-//                    public void onAnimationStart(Animator animator) {
-//
-//                    }
-//
-//                    @Override
-//                    public void onAnimationEnd(Animator animator) {
-//                        if(value == 0){
-//                            switch(viewNum){
-//                                case 0:
-//                                    ((TextView)view).setText(quoteList.get(quoteCounter).getQuoteText());
-//                                    break;
-//                                case 1:
-//                                    //set text to categories strongly/somewhat agree
-//                                    ((Button)view).setText((CharSequence) stronglyAgree);
-//                                    break;
-//                                case 2:
-//                                    //set text to categories strongly/somewhat agree
-//                                    ((Button)view).setText((CharSequence) somewhatAgree);
-//                                    break;
-//                                case 3:
-//                                    //set text to categories strongly/somewhat agree
-//                                    ((Button)view).setText((CharSequence) somewhatDisagree);
-//                                    break;
-//                                case 4:
-//                                    //set text to categories strongly/somewhat agree
-//                                    ((Button)view).setText((CharSequence) stronglyDisagree);
-//                                    break;
-//                            }
-//                            nextQuoteAnimation(view, 1, viewNum);
-//                        }
-//                    }
-//
-//                    @Override
-//                    public void onAnimationCancel(Animator animator) {
-//
-//                    }
-//
-//                    @Override
-//                    public void onAnimationRepeat(Animator animator) {
-//
-//                    }
-//                });
-//    }
     @Override
     public void onBackPressed() {
 

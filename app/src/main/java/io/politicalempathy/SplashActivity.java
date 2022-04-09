@@ -62,10 +62,10 @@ public class SplashActivity extends AppCompatActivity {
 
                 //start the splash screen activity
                 //adapted code from here: https://medium.com/geekculture/implementing-the-perfect-splash-screen-in-android-295de045a8dc
-                startActivity(new Intent(SplashActivity.this, CalcActivity.class));
+                //startActivity(new Intent(SplashActivity.this, CalcActivity.class));
 
 
-                //startActivity(new Intent(SplashActivity.this, LoginActivity.class));
+                startActivity(new Intent(SplashActivity.this, LoginActivity.class));
                 SplashActivity.this.finish();
             }
         }).start();
