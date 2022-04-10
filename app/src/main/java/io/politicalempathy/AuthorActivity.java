@@ -110,7 +110,7 @@ public class AuthorActivity extends AppCompatActivity {
 //            default:
 //        }
         switch (DbQuery.globalQuoteCounter) {
-            case 0 :
+            case 0:
                 authorImage.setImageResource(R.drawable.troosevelt);
                 break;
             case 1:
@@ -120,22 +120,22 @@ public class AuthorActivity extends AppCompatActivity {
                 authorImage.setImageResource(R.drawable.jfk);
                 break;
             case 3:
-                authorImage.setImageResource(R.drawable.paul);
+                authorImage.setImageResource(R.drawable.paul2);
                 break;
             case 4:
-                authorImage.setImageResource(R.drawable.clinton);
+                authorImage.setImageResource(R.drawable.clinton2);
                 break;
             case 5:
-                authorImage.setImageResource(R.drawable.rubio);
+                authorImage.setImageResource(R.drawable.rubio2);
                 break;
             case 6:
                 authorImage.setImageResource(R.drawable.lincoln);
                 break;
             case 7:
-                authorImage.setImageResource(R.drawable.sanders);
+                authorImage.setImageResource(R.drawable.sanders2);
                 break;
             case 8:
-                authorImage.setImageResource(R.drawable.carter);
+                authorImage.setImageResource(R.drawable.carter2);
                 break;
             case 9:
                 authorImage.setImageResource(R.drawable.reagan);
