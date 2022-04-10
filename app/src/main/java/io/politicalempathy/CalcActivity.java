@@ -49,7 +49,7 @@ public class CalcActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calc);
 
-        //create interactive response for register button
+        //create interactive response for take again button
         takeAgain = (Button) findViewById(R.id.takeagain);
         takeAgain.setOnClickListener(new View.OnClickListener() {
             @Override

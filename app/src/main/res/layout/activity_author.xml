@@ -18,34 +18,25 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-            android:id="@+id/authortext"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:padding="8dp"
-            android:text="QUOTE AUTHOR"
-            android:textColor="@color/white"
-            android:textSize="28sp"
-            android:textStyle="bold" />
+
 
         <TextView
             android:id="@+id/authorname"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:layout_margin="16dp"
+            android:layout_height="50dp"
+            android:layout_margin="8dp"
             android:gravity="center"
             android:text="Author Name"
             android:textColor="@color/white"
-            android:textSize="35sp"
+            android:textSize="30sp"
             android:textStyle="bold"
             />
 
         <TextView
             android:id="@+id/authorjob"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:layout_margin="16dp"
+            android:layout_height="50dp"
+            android:layout_margin="8dp"
             android:gravity="center"
             android:text="Author Job"
             android:textColor="@color/white"
@@ -56,8 +47,8 @@
         <TextView
             android:id="@+id/authoralignment"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:layout_margin="16dp"
+            android:layout_height="50dp"
+            android:layout_margin="8dp"
             android:gravity="center"
             android:text="Author Politics"
             android:textColor="@color/white"
@@ -77,10 +68,10 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/authortoplayout"
         app:layout_constraintVertical_bias="0.3"
-        app:srcCompat="@drawable/sanders" />
+        app:srcCompat="@drawable/troosevelt" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/nextquotebutton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Next Quote"

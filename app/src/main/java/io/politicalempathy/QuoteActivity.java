@@ -59,13 +59,29 @@ public class QuoteActivity extends AppCompatActivity implements View.OnClickList
 
     private void setQuote() {
         //set the quotes to the current quote counter
-//        quoteNum.setText(DbQuery.globalQuoteList.get(0).getQuoteID());
-//        quoteText.setText(DbQuery.globalQuoteList.get(0).getQuoteText());
-        quoteNum.setText(DbQuery.globalQuoteList.get(DbQuery.globalQuoteCounter).getQuoteID());
-        quoteText.setText(DbQuery.globalQuoteList.get(DbQuery.globalQuoteCounter).getQuoteText());
+//        quoteNum.setText(DbQuery.globalQuoteList.get(DbQuery.globalQuoteCounter).getQuoteID());
+//        quoteText.setText(DbQuery.globalQuoteList.get(DbQuery.globalQuoteCounter).getQuoteText());
 
-        //initialize quote counter
-        //quoteCounter = 0;
+        if (DbQuery.globalQuoteCounter < DbQuery.globalQuoteList.size() - 1) {
+
+            //update the quote number
+            //DbQuery.globalQuoteCounter++;
+            //-------------------------------------------------------------------------------------this now updates in author activity
+
+            //update the quote number at the top
+            quoteNum.setText("Quote " + String.valueOf(DbQuery.globalQuoteCounter + 1));
+
+            //update quote text
+            quoteText.setText(DbQuery.globalQuoteList.get(DbQuery.globalQuoteCounter).getQuoteText());
+
+        } else {
+            // Go to calculations of political compass
+            // create a class to get calculations based on answers so far, then call
+            // the following method
+            Intent intent = new Intent(QuoteActivity.this, CalcActivity.class);
+            startActivity(intent);
+            QuoteActivity.this.finish();
+        }
     }
 
     @Override
@@ -119,11 +135,13 @@ public class QuoteActivity extends AppCompatActivity implements View.OnClickList
         }, 2000);
 
         //move to the next question
-        nextQuote();
+        //nextQuote();
+        displayAuthor();
     }
 
-    private void setData(int questionNumber){
-
+    private void displayAuthor(){
+        Intent intent = new Intent(QuoteActivity.this, AuthorActivity.class);
+        startActivity(intent);
     }
 
     private void nextQuote() {
@@ -131,7 +149,8 @@ public class QuoteActivity extends AppCompatActivity implements View.OnClickList
         if (DbQuery.globalQuoteCounter < DbQuery.globalQuoteList.size() - 1) {
 
             //update the quote number
-            DbQuery.globalQuoteCounter++;
+            //DbQuery.globalQuoteCounter++;
+            //-------------------------------------------------------------------------------------this now updates in author activity
 
             //update the quote number at the top
             quoteNum.setText("Quote " + String.valueOf(DbQuery.globalQuoteCounter + 1));
