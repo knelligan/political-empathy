@@ -1,6 +1,7 @@
 package io.politicalempathy;
 
 
+import java.util.List;
 
 public class Response {
     String userID;
@@ -63,6 +64,66 @@ public class Response {
     public void setResponseValue(double responseValue) {
         this.responseValue = responseValue;
     }
+
+    public double createResponseValue(int responseNum, int quoteNum) {
+        double responseVal = 0.0;
+        switch (quoteNum) {
+            case 1:
+                responseVal = 1;
+                break;
+            case 2:
+                responseVal = 2;
+                break;
+            case 3:
+                responseVal = 3;
+                break;
+            case 4:
+                responseVal = 4;
+                break;
+            case 5:
+                responseVal = 1;
+                break;
+            case 6:
+                responseVal = 2;
+                break;
+            case 7:
+                responseVal = 3;
+                break;
+            case 8:
+                responseVal = 4;
+                break;
+            case 9:
+                responseVal = 3;
+                break;
+            case 10:
+                responseVal = 4;
+                break;
+            default:
+        }
+        return responseVal;
+    }
+
+    public double calculate(int responseNum, int quoteNum) {
+        double responseVal = 0.0;
+        switch (responseNum) {
+            case 1:
+                responseVal = 1;
+                break;
+            case 2:
+                responseVal = 2;
+                break;
+            case 3:
+                responseVal = 3;
+                break;
+            case 4:
+                responseVal = 4;
+                break;
+
+            default:
+        }
+        return responseValue;
+    }
+
 
     @Override
     public String toString() {
