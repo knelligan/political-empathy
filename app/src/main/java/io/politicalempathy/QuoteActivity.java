@@ -24,6 +24,7 @@ public class QuoteActivity extends AppCompatActivity implements View.OnClickList
     //list of all quotes used in the program------------------------------------------replace this reference with global variable
     //private List<Quote> quoteList;
 
+
     //current number of the quote being displayed in the series
     private int quoteCounter;
 
@@ -155,4 +156,13 @@ public class QuoteActivity extends AppCompatActivity implements View.OnClickList
     public void onBackPressed() {
 
     }
+
+    public void setQuoteCounter(int quoteCounter) {
+        this.quoteCounter = quoteCounter;
+    }
+
+    public int getQuoteCounter() {
+        return quoteCounter;
+    }
+
 }

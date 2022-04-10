@@ -188,6 +188,7 @@ public class DbQuery {
 
         //put the responseValue into the map
         double userResponse = resp.createResponseValue(responseNum, quoteNum);
+        System.out.println("user response value: " + userResponse);
         //set response value
         resp.setResponseValue(userResponse);
         //set type

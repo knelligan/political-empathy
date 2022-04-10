@@ -2,6 +2,7 @@ package io.politicalempathy;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -12,6 +13,8 @@ import android.graphics.Rect;
 import android.os.Bundle;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -38,10 +41,24 @@ public class CalcActivity extends AppCompatActivity {
     /* Bitmap object used for drawing */
     private Bitmap bitmap;
 
+    //create button interactivity for register button
+    private Button takeAgain;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calc);
+
+        //create interactive response for register button
+        takeAgain = (Button) findViewById(R.id.takeagain);
+        takeAgain.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                DbQuery.globalResponseList.clear();
+                //QuoteActivity.setQuoteCounter(0);
+                startActivity(new Intent(CalcActivity.this, QuoteActivity.class));
+            }
+        });
 
         //researched plotting values here: https://programmerworld.co/android/how-to-plot-arrays-x-and-y-coordinates-on-axes-in-your-android-app-without-using-dependencies-or-libraries/
 
@@ -59,6 +76,8 @@ public class CalcActivity extends AppCompatActivity {
         plotValue();
 
     }
+
+
 
     public void scoreCalculations() {
         //get the value of each quote
