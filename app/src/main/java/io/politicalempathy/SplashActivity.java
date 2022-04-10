@@ -46,6 +46,9 @@ public class SplashActivity extends AppCompatActivity {
         //Access a cloud firestore instance from activity
         DbQuery.globalFirestore = FirebaseFirestore.getInstance();
 
+        //set the quoteCounter value to 0
+        DbQuery.globalQuoteCounter = 0;
+
         //create a thread/runnable to make the splash screen launch
         new Thread(new Runnable() {
             @Override

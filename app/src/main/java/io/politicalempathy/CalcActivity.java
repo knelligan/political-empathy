@@ -54,8 +54,11 @@ public class CalcActivity extends AppCompatActivity {
         takeAgain.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //clear response list to store fresh results
                 DbQuery.globalResponseList.clear();
-                //QuoteActivity.setQuoteCounter(0);
+
+                //reset the quote counter to 0 to display survey from start
+                DbQuery.globalQuoteCounter = 0;
                 startActivity(new Intent(CalcActivity.this, QuoteActivity.class));
             }
         });
@@ -80,10 +83,9 @@ public class CalcActivity extends AppCompatActivity {
 
 
     public void scoreCalculations() {
-        //get the value of each quote
+        //get the current response in the list
         Response response;
-        List<Double> econNums = new ArrayList();
-        List<Double> socNums = new ArrayList();
+
         int econCount = 0;
         double econTotal = 0;
         int socCount = 0;

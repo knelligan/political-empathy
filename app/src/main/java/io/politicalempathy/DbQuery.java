@@ -32,6 +32,9 @@ public class DbQuery {
     /* User ID to be used for response list */
     public static String globalUserID;
 
+    /* User ID to be used for response list */
+    public static int globalQuoteCounter;
+
 
     public static void createUserData(String email, String name, CompleteListener cl) {
         //researched here: https://firebase.google.com/docs/firestore/manage-data/transactions
@@ -137,8 +140,11 @@ public class DbQuery {
                             //get quote type
                             String type = quoteDocument.getString("TYPE");
 
+                            //get quote type
+                            String job = quoteDocument.getString("JOB");
+
                             //add a new quote with these fields to the quotes list
-                            globalQuoteList.add(new Quote("Quote " + i, quoteText, type, author, bias, value));
+                            globalQuoteList.add(new Quote("Quote " + i, quoteText, type, author, bias, value, job));
                         }
                         //invoke the complete listener interface based on a successful access of the database
                         completeListener.onSuccess();

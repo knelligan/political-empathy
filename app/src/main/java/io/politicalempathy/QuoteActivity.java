@@ -21,12 +21,9 @@ public class QuoteActivity extends AppCompatActivity implements View.OnClickList
     //categories for the respondent to choose from
     private Button stronglyAgree, somewhatAgree, somewhatDisagree, stronglyDisagree;
 
-    //list of all quotes used in the program------------------------------------------replace this reference with global variable
-    //private List<Quote> quoteList;
-
 
     //current number of the quote being displayed in the series
-    private int quoteCounter;
+    //private int quoteCounter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,12 +58,14 @@ public class QuoteActivity extends AppCompatActivity implements View.OnClickList
 
 
     private void setQuote() {
-
-        quoteNum.setText(DbQuery.globalQuoteList.get(0).getQuoteID());
-        quoteText.setText(DbQuery.globalQuoteList.get(0).getQuoteText());
+        //set the quotes to the current quote counter
+//        quoteNum.setText(DbQuery.globalQuoteList.get(0).getQuoteID());
+//        quoteText.setText(DbQuery.globalQuoteList.get(0).getQuoteText());
+        quoteNum.setText(DbQuery.globalQuoteList.get(DbQuery.globalQuoteCounter).getQuoteID());
+        quoteText.setText(DbQuery.globalQuoteList.get(DbQuery.globalQuoteCounter).getQuoteText());
 
         //initialize quote counter
-        quoteCounter = 0;
+        //quoteCounter = 0;
     }
 
     @Override
@@ -87,8 +86,7 @@ public class QuoteActivity extends AppCompatActivity implements View.OnClickList
                 break;
             default:
         }
-        //save the value to make calculations later
-        //------------------------------------------------------- fix this later
+        //make a call to savechoice to save the user's survey response
         saveChoice(selection);
     }
 
@@ -97,7 +95,7 @@ public class QuoteActivity extends AppCompatActivity implements View.OnClickList
         //-------------------------------------------------------fix later
 
         //ths is how it would work
-        DbQuery.addResponse(quoteCounter, userChoice, new CompleteListener() {
+        DbQuery.addResponse(DbQuery.globalQuoteCounter, userChoice, new CompleteListener() {
             @Override
             public void onSuccess() {
                 System.out.println("response recorded");
@@ -129,18 +127,18 @@ public class QuoteActivity extends AppCompatActivity implements View.OnClickList
     }
 
     private void nextQuote() {
-        //if (quoteCounter < quoteList.size() - 1) {
-        if (quoteCounter < DbQuery.globalQuoteList.size() - 1) {
+        //if (DbQuery.globalQuoteCounter < quoteList.size() - 1) {
+        if (DbQuery.globalQuoteCounter < DbQuery.globalQuoteList.size() - 1) {
 
             //update the quote number
-            quoteCounter++;
+            DbQuery.globalQuoteCounter++;
 
             //update the quote number at the top
-            quoteNum.setText("Quote " + String.valueOf(quoteCounter + 1));
+            quoteNum.setText("Quote " + String.valueOf(DbQuery.globalQuoteCounter + 1));
 
             //update quote text
             //quoteText.setText(quoteList.get(quoteCounter).getQuoteText());
-            quoteText.setText(DbQuery.globalQuoteList.get(quoteCounter).getQuoteText());
+            quoteText.setText(DbQuery.globalQuoteList.get(DbQuery.globalQuoteCounter).getQuoteText());
 
         } else {
             // Go to calculations of political compass
@@ -157,12 +155,5 @@ public class QuoteActivity extends AppCompatActivity implements View.OnClickList
 
     }
 
-    public void setQuoteCounter(int quoteCounter) {
-        this.quoteCounter = quoteCounter;
-    }
-
-    public int getQuoteCounter() {
-        return quoteCounter;
-    }
 
 }

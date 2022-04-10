@@ -7,12 +7,12 @@ public class Quote {
     String author;
     String bias;
     double quoteValue;
+    String job;
 
-    //testing this, need toinclude with quote
-    int response;
+
 
     //creates a quote object used to display on each quote activity screen
-    public Quote(String quoteID, String quoteText, String type, String author, String bias, double quoteValue) {
+    public Quote(String quoteID, String quoteText, String type, String author, String bias, double quoteValue, String job) {
 
         //the id in firebase associated with the quote"
         this.quoteID = quoteID;
@@ -26,14 +26,16 @@ public class Quote {
         //who wrote the quote
         this.author = author;
 
-        //left, right, up, down
+        //political party
         this.bias = bias;
 
         //value -10 - +10
         this.quoteValue = quoteValue;
+
+        //quote author's job
+        this.job = job;
         
-        //set response value to -1 before user responds
-        response = -1;
+
     }
 
     public String getQuoteID() {
@@ -61,18 +63,14 @@ public class Quote {
         return quoteValue;
     }
 
-    public int getResponseValue() {
-        return response;
+    public String getJob() {
+        return job;
     }
 
-    public void setResponseValue(int responseVal){
-        //for strongly agree: 1
-        //for somewhat agree: 2
-        //for somewhat disagree: 3
-        //for strongly disagree: 4
-        response = responseVal;
-
+    public void setJob(String job) {
+        this.job = job;
     }
+
 
     @Override
     public String toString() {
@@ -83,7 +81,6 @@ public class Quote {
                 ", author='" + author + '\'' +
                 ", bias='" + bias + '\'' +
                 ", quoteValue=" + quoteValue +
-                ", response=" + response +
                 '}';
     }
 
