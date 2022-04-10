@@ -15,6 +15,9 @@ import android.view.SurfaceView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class CalcActivity extends AppCompatActivity {
 
     /* Textview for the economic score */
@@ -59,9 +62,31 @@ public class CalcActivity extends AppCompatActivity {
 
     public void scoreCalculations() {
         //get the value of each quote
-        for (int i = 0; i < DbQuery.globalQuoteList.size(); i++) {
+        Response response;
+        List<Double> econNums = new ArrayList();
+        List<Double> socNums = new ArrayList();
+        int econCount = 0;
+        double econTotal = 0;
+        int socCount = 0;
+        double socTotal = 0;
 
+        for (int i = 0; i < DbQuery.globalResponseList.size(); i++) {
+            response = DbQuery.globalResponseList.get(i);
+            if(response.getType().equals("Economic")){
+                //type is economic
+                econCount++;
+                econTotal += response.getResponseValue();
+            }else{
+                //type is social
+                socCount++;
+                socTotal += response.getResponseValue();
+            }
         }
+        double avgEcon = Math.round(econTotal/econCount);
+        double avgSoc = Math.round(socTotal/socCount);
+
+        econScoreValue = (int)avgEcon;
+        socScoreValue = (int)avgSoc;
 
 
     }
@@ -71,11 +96,11 @@ public class CalcActivity extends AppCompatActivity {
         //this needs to be updated/replaced with scores from db-------------------------------------------------------
         //calculate the average of the econ scores
         //x = econ
-        econScoreValue = -3;
+        //econScoreValue = -3;
 
         //calculate the average of the social scores------------------------------------
         //y = soc
-        socScoreValue = 7;
+        //socScoreValue = 7;
 
         //researched bitmap info here: https://itecnote.com/tecnote/android-getting-bitmap-from-custom-surfaceview/
         //create the bitmap used for plotting

@@ -6,6 +6,7 @@ import androidx.collection.ArrayMap;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -26,7 +27,10 @@ public class DbQuery {
     public static List<Quote> globalQuoteList = new ArrayList<>();
 
     /* Global variable for the responses list */
-    public static List<Quote> globalResponseList = new ArrayList<>();
+    public static List<Response> globalResponseList = new ArrayList<>();
+
+    /* User ID to be used for response list */
+    public static String globalUserID;
 
 
     public static void createUserData(String email, String name, CompleteListener cl) {
@@ -80,6 +84,11 @@ public class DbQuery {
     public static void loadQuotes(CompleteListener completeListener) {
         //clear the existing quote list
         globalQuoteList.clear();
+
+        //create global user id to be used in response objects
+        FirebaseUser currentFirebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+        globalUserID = currentFirebaseUser.getUid();
+        System.out.println("user id is: " + globalUserID);
 
         //load quotes from db
         globalFirestore.collection("QUOTES").get()
@@ -147,9 +156,71 @@ public class DbQuery {
     }
 
     public static void addResponse(int quoteNum, int responseNum, CompleteListener completeListener) {
+
         //get user id
+        FirebaseUser currentFirebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+        String userID = currentFirebaseUser.getUid();
 
         //need quoteID, quoteValue, responseNum, responseValue
 
+        //create a map to store user info
+        Map<String, Object> userResponses = new ArrayMap<>();
+
+        //Put the email id into the map
+        userResponses.put("USER_ID", userID);
+
+        //put the quoteid into the map
+        Quote quote = globalQuoteList.get(quoteNum);
+        String quoteID = quote.getQuoteID();
+        System.out.println("quote id: " + quoteID);
+        userResponses.put("QUOTE_ID", quoteID);
+
+        //put the score into the map
+        double qVal = quote.getQuoteValue();
+        System.out.println("quote val: " + qVal);
+        userResponses.put("QUOTE_VALUE", qVal);
+
+        //put the response number selection (strongly agree - strongly disagree) into map
+        userResponses.put("RESPONSE_NUM", responseNum);
+
+        //create new Response and add to list
+        Response resp = new Response(userID, quoteID, responseNum);
+
+        //put the responseValue into the map
+        double userResponse = resp.createResponseValue(responseNum, quoteNum);
+        //set response value
+        resp.setResponseValue(userResponse);
+        //set type
+        resp.setType(quote.getType());
+        globalResponseList.add(resp);
+
+        //researched here: https://stackoverflow.com/questions/53129967/how-to-pass-a-firestore-document-reference-for-a-collection-made-in-mainactivity
+        //Create a document reference for the user response data
+        DocumentReference responseDocument = globalFirestore.collection("RESPONSES").document(FirebaseAuth.getInstance().getCurrentUser().getUid());
+
+        //researched here: https://www.tabnine.com/code/java/methods/com.google.cloud.firestore.WriteBatch/set
+        //documentation: https://firebase.google.com/docs/reference/js/v8/firebase.firestore.WriteBatch
+        //batch will be used to perform multiple writes as a single atomic unit
+        WriteBatch batch = globalFirestore.batch();
+
+        //set the value for response
+        batch.set(responseDocument, userResponses);
+
+        batch.commit()
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void unused) {
+                        //checks if the user response was registered correctly
+                        completeListener.onSuccess();
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        //checks if the user response registered incorrectly
+                        completeListener.onFailure();
+                    }
+                });
     }
+
 }

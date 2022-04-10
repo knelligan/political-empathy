@@ -96,7 +96,17 @@ public class QuoteActivity extends AppCompatActivity implements View.OnClickList
         //-------------------------------------------------------fix later
 
         //ths is how it would work
-        //DbQuery.globalQuoteList.get(quoteCounter).
+        DbQuery.addResponse(quoteCounter, userChoice, new CompleteListener() {
+            @Override
+            public void onSuccess() {
+                System.out.println("response recorded");
+            }
+
+            @Override
+            public void onFailure() {
+                System.out.println("response failed to record");
+            }
+        });
 
 
 

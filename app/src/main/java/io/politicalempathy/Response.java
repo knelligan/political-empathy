@@ -9,6 +9,7 @@ public class Response {
     double quoteValue;
     int responseNum;
     double responseValue;
+    String type;
 
 
     /**
@@ -22,6 +23,7 @@ public class Response {
         this.quoteValue = 0;
         this.responseNum = responseNum;
         this.responseValue = -1;
+        type = "";
 
     }
 
@@ -65,63 +67,42 @@ public class Response {
         this.responseValue = responseValue;
     }
 
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public String getType() {
+        return type;
+    }
+
     public double createResponseValue(int responseNum, int quoteNum) {
         double responseVal = 0.0;
-        switch (quoteNum) {
+        Quote currentQ;
+        switch (responseNum) {
             case 1:
-                responseVal = 1;
+                //respondent agrees, response value is equal to quote val
+                currentQ  = DbQuery.globalQuoteList.get(quoteNum);
+                responseVal = currentQ.getQuoteValue();
                 break;
             case 2:
-                responseVal = 2;
+                //respondent somewhat agrees, multiplier applied to diminish quote val
+                currentQ  = DbQuery.globalQuoteList.get(quoteNum);
+                responseVal = currentQ.getQuoteValue() * .5;
                 break;
             case 3:
-                responseVal = 3;
+                //somewhat disagrees: flip the negative/positive of the quoteval and apply multiplier
+                currentQ  = DbQuery.globalQuoteList.get(quoteNum);
+                responseVal = (currentQ.getQuoteValue() * .5) * -1;
                 break;
             case 4:
-                responseVal = 4;
+                //respondent disagrees: flip the negative/positive of the quoteval
+                currentQ  = DbQuery.globalQuoteList.get(quoteNum);
+                responseVal = (currentQ.getQuoteValue()) * -1;
                 break;
-            case 5:
-                responseVal = 1;
-                break;
-            case 6:
-                responseVal = 2;
-                break;
-            case 7:
-                responseVal = 3;
-                break;
-            case 8:
-                responseVal = 4;
-                break;
-            case 9:
-                responseVal = 3;
-                break;
-            case 10:
-                responseVal = 4;
-                break;
+
             default:
         }
         return responseVal;
-    }
-
-    public double calculate(int responseNum, int quoteNum) {
-        double responseVal = 0.0;
-        switch (responseNum) {
-            case 1:
-                responseVal = 1;
-                break;
-            case 2:
-                responseVal = 2;
-                break;
-            case 3:
-                responseVal = 3;
-                break;
-            case 4:
-                responseVal = 4;
-                break;
-
-            default:
-        }
-        return responseValue;
     }
 
 
