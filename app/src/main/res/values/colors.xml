@@ -10,4 +10,6 @@
     <color name="pink">#DE354C</color>
     <color name="disagreepink">#B2387E</color>
     <color name="medgray">#939799</color>
+    <color name="darkgray">#616161</color>
+    <color name="lightgray">#D4D4D4</color>
 </resources>

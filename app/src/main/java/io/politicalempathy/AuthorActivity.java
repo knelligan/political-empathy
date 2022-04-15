@@ -78,66 +78,46 @@ public class AuthorActivity extends AppCompatActivity {
     public void setAuthorImage(){
 
         String name = DbQuery.globalQuoteList.get(DbQuery.globalQuoteCounter).getAuthor();
-//        switch (name) {
-//            case "Jimmy Carter" :
-//                authorImage.setImageResource(R.drawable.carter);
-//                break;
-//            case "Bill Clinton":
-//                authorImage.setImageResource(R.drawable.clinton);
-//                break;
-//            case "Rand Paul":
-//                authorImage.setImageResource(R.drawable.paul);
-//                break;
-//            case "Abraham Lincoln":
-//                authorImage.setImageResource(R.drawable.lincoln);
-//            case "John F Kennedy":
-//                authorImage.setImageResource(R.drawable.jfk);
-//                break;
-//            case "Ronald Reagan":
-//                authorImage.setImageResource(R.drawable.reagan);
-//                break;
-//            case "Marco Rubio":
-//                authorImage.setImageResource(R.drawable.rubio);
-//                break;
-//            case "Theodore Roosevelt":
-//                authorImage.setImageResource(R.drawable.troosevelt);
-//            case "Barack Obama":
-//                authorImage.setImageResource(R.drawable.obama);
-//                break;
-//            case "Bernie Sanders":
-//                authorImage.setImageResource(R.drawable.sanders);
-//                break;
-//            default:
-//        }
+
         switch (DbQuery.globalQuoteCounter) {
             case 0:
+                //display roosevelt picture
                 authorImage.setImageResource(R.drawable.troosevelt);
                 break;
             case 1:
+                //display obama picture
                 authorImage.setImageResource(R.drawable.obama);
                 break;
             case 2:
+                //display kennedy picture
                 authorImage.setImageResource(R.drawable.jfk);
                 break;
             case 3:
+                //display paul picture
                 authorImage.setImageResource(R.drawable.paul2);
                 break;
             case 4:
+                //display clinton picture
                 authorImage.setImageResource(R.drawable.clinton2);
                 break;
             case 5:
+                //display rubio picture
                 authorImage.setImageResource(R.drawable.rubio2);
                 break;
             case 6:
+                //display lincoln picture
                 authorImage.setImageResource(R.drawable.lincoln);
                 break;
             case 7:
+                //display sanders picture
                 authorImage.setImageResource(R.drawable.sanders2);
                 break;
             case 8:
+                //display carter picture
                 authorImage.setImageResource(R.drawable.carter2);
                 break;
             case 9:
+                //display reagan picture
                 authorImage.setImageResource(R.drawable.reagan);
                 break;
             default:
