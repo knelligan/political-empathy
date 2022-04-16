@@ -62,8 +62,8 @@ public class QuoteActivity extends AppCompatActivity implements View.OnClickList
 //        quoteNum.setText(DbQuery.globalQuoteList.get(DbQuery.globalQuoteCounter).getQuoteID());
 //        quoteText.setText(DbQuery.globalQuoteList.get(DbQuery.globalQuoteCounter).getQuoteText());
 
-        if (DbQuery.globalQuoteCounter < DbQuery.globalQuoteList.size() - 1) {
-
+        if (DbQuery.globalQuoteCounter < DbQuery.globalQuoteList.size() ) {
+            System.out.println("quote counter is: " + DbQuery.globalQuoteCounter + " quotelistsize: " + DbQuery.globalQuoteList.size());
             //update the quote number at the top
             quoteNum.setText("Quote " + String.valueOf(DbQuery.globalQuoteCounter + 1));
 
@@ -98,11 +98,18 @@ public class QuoteActivity extends AppCompatActivity implements View.OnClickList
                 break;
             default:
         }
+
+        System.out.println("agree/disagree button click method working");
+
         //make a call to savechoice to save the user's survey response
+
         saveChoice(selection);
     }
 
     private void saveChoice(int userChoice) {
+
+        System.out.println("savechoice method working");
+
         //save the value in the file
 
         //add user response to the database

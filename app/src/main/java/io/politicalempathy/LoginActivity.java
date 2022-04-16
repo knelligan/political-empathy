@@ -28,6 +28,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     private FirebaseAuth mAuth;
 
+    /* User info to be stored locally */
+    public static User currentlyLoggedInUser;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -130,6 +134,13 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             public void onSuccess() {
                                 //move to the main menu activity
                                 //startActivity(new Intent(LoginActivity.this, MainMenuActivity.class));
+
+                                FirebaseUser currentFirebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+                                String userID = currentFirebaseUser.getUid();
+
+                                //currentlyLoggedInUser = new User(email);
+                                //currentlyLoggedInUser.setUserID(userID);
+
                                 startActivity(new Intent(LoginActivity.this, QuoteActivity.class));
                             }
 

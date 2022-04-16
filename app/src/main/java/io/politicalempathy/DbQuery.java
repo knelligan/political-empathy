@@ -35,6 +35,9 @@ public class DbQuery {
     /* User ID to be used for response list */
     public static int globalQuoteCounter;
 
+    /* Default user response value */
+    public static final double DEFAULT_VALUE = -100.0;
+
 
     public static void createUserData(String email, String name, CompleteListener cl) {
         //researched here: https://firebase.google.com/docs/firestore/manage-data/transactions
@@ -85,6 +88,10 @@ public class DbQuery {
     }
 
     public static void loadQuotes(CompleteListener completeListener) {
+        //clear and load the default response list
+        globalResponseList.clear();
+        //loadDefaultResponses();
+
         //clear the existing quote list
         globalQuoteList.clear();
 
@@ -182,15 +189,15 @@ public class DbQuery {
         Quote quote = globalQuoteList.get(quoteNum);
         String quoteID = quote.getQuoteID();
         System.out.println("quote id: " + quoteID);
-        userResponses.put("QUOTE_ID", quoteID);
+        //userResponses.put("QUOTE_ID", quoteID);
 
         //put the score into the firestore map
         double qVal = quote.getQuoteValue();
         System.out.println("quote val: " + qVal);
-        userResponses.put("QUOTE_VALUE", qVal);
+        //userResponses.put("QUOTE_VALUE", qVal);
 
         //put the response number selection (strongly agree - strongly disagree) into firestore map
-        userResponses.put("RESPONSE_NUM", responseNum);
+        //userResponses.put("RESPONSE_NUM", responseNum);
 
         //create new Response and add to global response arraylist
         Response resp = new Response(userID, quoteID, responseNum);
@@ -205,6 +212,68 @@ public class DbQuery {
         //set type or response (either economic or social)
         resp.setType(quote.getType());
         globalResponseList.add(resp);
+
+
+        //add user selected responses
+        if(globalResponseList.size() > 0 && globalResponseList.get(0) != null) {
+            userResponses.put("Q1_RESP", globalResponseList.get(0).getResponseValue());
+        }else{
+            userResponses.put("Q1_RESP", DEFAULT_VALUE);
+        }
+        if(globalResponseList.size() > 1 && globalResponseList.get(1) != null) {
+            userResponses.put("Q2_RESP", globalResponseList.get(1).getResponseValue());
+        }else{
+            userResponses.put("Q2_RESP", DEFAULT_VALUE);
+        }
+        if(globalResponseList.size() > 2 && globalResponseList.get(2) != null) {
+            userResponses.put("Q3_RESP", globalResponseList.get(2).getResponseValue());
+        }else{
+            userResponses.put("Q3_RESP", DEFAULT_VALUE);
+        }
+        if(globalResponseList.size() > 3 && globalResponseList.get(3) != null) {
+            userResponses.put("Q4_RESP", globalResponseList.get(3).getResponseValue());
+        }else{
+            userResponses.put("Q4_RESP", DEFAULT_VALUE);
+        }
+        if(globalResponseList.size() > 4 && globalResponseList.get(4) != null) {
+            userResponses.put("Q5_RESP", globalResponseList.get(4).getResponseValue());
+        }else{
+            userResponses.put("Q5_RESP", DEFAULT_VALUE);
+        }
+        if(globalResponseList.size() > 5 && globalResponseList.get(5) != null) {
+            userResponses.put("Q6_RESP", globalResponseList.get(5).getResponseValue());
+        }else{
+            userResponses.put("Q6_RESP", DEFAULT_VALUE);
+        }
+        if(globalResponseList.size() > 6 && globalResponseList.get(6) != null) {
+            userResponses.put("Q7_RESP", globalResponseList.get(6).getResponseValue());
+        }else{
+            userResponses.put("Q7_RESP", DEFAULT_VALUE);
+        }
+        if(globalResponseList.size() > 7 && globalResponseList.get(7) != null) {
+            userResponses.put("Q8_RESP", globalResponseList.get(7).getResponseValue());
+        }else{
+            userResponses.put("Q8_RESP", DEFAULT_VALUE);
+        }
+        if(globalResponseList.size() > 8 && globalResponseList.get(8) != null) {
+            userResponses.put("Q9_RESP", globalResponseList.get(8).getResponseValue());
+        }else{
+            userResponses.put("Q9_RESP", DEFAULT_VALUE);
+        }
+        if(globalResponseList.size() > 9 && globalResponseList.get(9) != null) {
+            userResponses.put("Q10_RESP", globalResponseList.get(9).getResponseValue());
+        }else{
+            userResponses.put("Q10_RESP", DEFAULT_VALUE);
+        }
+//        userResponses.put("Q2_RESP", LoginActivity.currentlyLoggedInUser.getQ2Resp());
+//        userResponses.put("Q3_RESP", LoginActivity.currentlyLoggedInUser.getQ3Resp());
+//        userResponses.put("Q4_RESP", LoginActivity.currentlyLoggedInUser.getQ4Resp());
+//        userResponses.put("Q5_RESP", LoginActivity.currentlyLoggedInUser.getQ5Resp());
+//        userResponses.put("Q6_RESP", LoginActivity.currentlyLoggedInUser.getQ6Resp());
+//        userResponses.put("Q7_RESP", LoginActivity.currentlyLoggedInUser.getQ7Resp());
+//        userResponses.put("Q8_RESP", LoginActivity.currentlyLoggedInUser.getQ8Resp());
+//        userResponses.put("Q9_RESP", LoginActivity.currentlyLoggedInUser.getQ9Resp());
+//        userResponses.put("Q10_RESP", LoginActivity.currentlyLoggedInUser.getQ10Resp());
 
         //researched here: https://stackoverflow.com/questions/53129967/how-to-pass-a-firestore-document-reference-for-a-collection-made-in-mainactivity
         //Create a document reference for the user response data in firestore
@@ -235,4 +304,10 @@ public class DbQuery {
                 });
     }
 
+
+//    public static void loadDefaultResponses(){
+//        for(int i = 0; i < 10; i++){
+//
+//        }
+//    }
 }

@@ -86,12 +86,18 @@ public class CalcActivity extends AppCompatActivity {
         //get the current response in the list
         Response response;
 
+        //set intial count of econ/social to 0
+        //set initial score total of econ/social to 0
         int econCount = 0;
         double econTotal = 0;
         int socCount = 0;
         double socTotal = 0;
 
+        //get each response of the users from the locally stored response arraylist
         for (int i = 0; i < DbQuery.globalResponseList.size(); i++) {
+
+            //local variable for the current response of the user in the arraylist to
+            //to grab each response from
             response = DbQuery.globalResponseList.get(i);
             if(response.getType().equals("Economic")){
                 //type is economic
@@ -103,8 +109,20 @@ public class CalcActivity extends AppCompatActivity {
                 socTotal += response.getResponseValue();
             }
         }
+        //here is where i will store the econ/soc in user class----------------------------------------------------------------------------------------------
+        //calculate econ score by finding the average of the
+        //economic responses
         double avgEcon = Math.round(econTotal/econCount);
+        //LoginActivity.currentlyLoggedInUser.setEconScore(avgEcon);
+
+
+        //calculate the social score by finding the average of
+        //the social responses
         double avgSoc = Math.round(socTotal/socCount);
+        //LoginActivity.currentlyLoggedInUser.setSocialScore(avgSoc);
+
+
+        //cast the score value to int to make the score easier to understand/read
 
         econScoreValue = (int)avgEcon;
         socScoreValue = (int)avgSoc;
@@ -253,5 +271,6 @@ public class CalcActivity extends AppCompatActivity {
         //from the origin point
         return new Point(x, y);
     }
+
 
 }

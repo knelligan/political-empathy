@@ -101,7 +101,9 @@ public class Response {
      * When a user only somewhat agrees, the original quote value of (-10/+10) is
      * multiplied by .5.
      *
-     * 
+     * This method is called when a user clicks a button on the quoteActivity
+     * call path is: QuoteActivity.onClick() -> saveChoice() -> DbQuery.addResponse()
+     *
      * @param responseNum
      * @param quoteNum
      * @return
