@@ -162,6 +162,8 @@ public class DbQuery {
     }
 
     public static void addResponse(int quoteNum, int responseNum, CompleteListener completeListener) {
+        //path to response:
+
 
         //get user id
         FirebaseUser currentFirebaseUser = FirebaseAuth.getInstance().getCurrentUser();
@@ -169,40 +171,43 @@ public class DbQuery {
 
         //need quoteID, quoteValue, responseNum, responseValue
 
-        //create a map to store user info
+        //create a map to store user info both user id and responses
+        //this will be used to enter this data into firestore
         Map<String, Object> userResponses = new ArrayMap<>();
 
-        //Put the email id into the map
+        //Put the email id into the firestore map
         userResponses.put("USER_ID", userID);
 
-        //put the quoteid into the map
+        //put the quoteid into the firestore map
         Quote quote = globalQuoteList.get(quoteNum);
         String quoteID = quote.getQuoteID();
         System.out.println("quote id: " + quoteID);
         userResponses.put("QUOTE_ID", quoteID);
 
-        //put the score into the map
+        //put the score into the firestore map
         double qVal = quote.getQuoteValue();
         System.out.println("quote val: " + qVal);
         userResponses.put("QUOTE_VALUE", qVal);
 
-        //put the response number selection (strongly agree - strongly disagree) into map
+        //put the response number selection (strongly agree - strongly disagree) into firestore map
         userResponses.put("RESPONSE_NUM", responseNum);
 
-        //create new Response and add to list
+        //create new Response and add to global response arraylist
         Response resp = new Response(userID, quoteID, responseNum);
 
         //put the responseValue into the map
         double userResponse = resp.createResponseValue(responseNum, quoteNum);
         System.out.println("user response value: " + userResponse);
-        //set response value
+
+        //set response value (
         resp.setResponseValue(userResponse);
-        //set type
+
+        //set type or response (either economic or social)
         resp.setType(quote.getType());
         globalResponseList.add(resp);
 
         //researched here: https://stackoverflow.com/questions/53129967/how-to-pass-a-firestore-document-reference-for-a-collection-made-in-mainactivity
-        //Create a document reference for the user response data
+        //Create a document reference for the user response data in firestore
         DocumentReference responseDocument = globalFirestore.collection("RESPONSES").document(FirebaseAuth.getInstance().getCurrentUser().getUid());
 
         //researched here: https://www.tabnine.com/code/java/methods/com.google.cloud.firestore.WriteBatch/set

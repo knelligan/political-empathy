@@ -75,12 +75,43 @@ public class Response {
         return type;
     }
 
+
+    /**
+     * This method calculates what the value of each user response should be.
+     * It takes in a responseNum which is the user-selection/response to the quote
+     * * 1 maps to "strongly agree"
+     * * 2 maps to "somewhat agree"
+     * * 3 maps to "somewhat disagree"
+     * * 4 maps to "strongly disagree"
+     *
+     * The other param is the quotenum: this allows us to map the user response
+     * to the specific survey quote.
+     *
+     * The quotenum helps us find the quote value associated with each quote.
+     * Quote values can either be -10 or +10 to make calculations easier.  The
+     * intensity of user agreement/disagreement is reflected by percent of agreement
+     * mulipliers.
+     *
+     * With the response/quote information, it then calculates a user response value.
+     * A negative value multiplier is incorporated for values that are more "left" or
+     * "libertarian," for "right" and "authoritarian" there is no multiplier since these
+     * move on the political compass as positive values.
+     *
+     * Theres is a multiplier of "50%" (.5) mapped to "somewhat" responses (both agree/disagree).
+     * When a user only somewhat agrees, the original quote value of (-10/+10) is
+     * multiplied by .5.
+     *
+     * 
+     * @param responseNum
+     * @param quoteNum
+     * @return
+     */
     public double createResponseValue(int responseNum, int quoteNum) {
         double responseVal = 0.0;
         Quote currentQ;
         switch (responseNum) {
             case 1:
-                //respondent agrees, response value is equal to quote val
+                //respondent strongly agrees, response value is equal to quote val
                 currentQ  = DbQuery.globalQuoteList.get(quoteNum);
                 responseVal = currentQ.getQuoteValue();
                 break;
