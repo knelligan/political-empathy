@@ -1,7 +1,9 @@
 package io.politicalempathy;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -70,35 +72,10 @@ public class CalcActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 System.out.println("click is working for submit");
-                startActivity(new Intent(CalcActivity.this, ThankYouActivity.class));
+                dialogShareRequest();
+                //startActivity(new Intent(CalcActivity.this, ThankYouActivity.class));
             }
         });
-
-//        takeAgain.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                //clear response list to store fresh results
-//                DbQuery.globalResponseList.clear();
-//
-//                //reset the quote counter to 0 to display survey from start
-//                DbQuery.globalQuoteCounter = 0;
-//                startActivity(new Intent(CalcActivity.this, QuoteActivity.class));
-//            }
-//        });
-
-        //create interactive response for take again button
-        submitResults = (Button) findViewById(R.id.submit_final_screen);
-//        submitResults.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                //clear response list to store fresh results
-//                //DbQuery.globalResponseList.clear();
-//
-//                //reset the quote counter to 0 to display survey from start
-//                //DbQuery.globalQuoteCounter = 0;
-//                startActivity(new Intent(CalcActivity.this, FinalActivity.class));
-//            }
-//        });
 
 
         //researched plotting values here: https://programmerworld.co/android/how-to-plot-arrays-x-and-y-coordinates-on-axes-in-your-android-app-without-using-dependencies-or-libraries/
@@ -120,8 +97,9 @@ public class CalcActivity extends AppCompatActivity {
         //create summary results
         writeSummaryResults();
 
-    }
 
+
+    }
 
     public void scoreCalculations() {
         //get the current response in the list
@@ -403,5 +381,37 @@ public class CalcActivity extends AppCompatActivity {
         System.out.println(summary);
 
     }
+
+
+    private void dialogShareRequest() {
+        //researched this here: https://stackoverflow.com/questions/2478517/how-to-display-a-yes-no-dialog-box-on-android
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+        builder.setTitle("Share Results");
+        builder.setMessage("Would you like to share your survey results?");
+
+        builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+
+            public void onClick(DialogInterface dialog, int which) {
+                // proceed to share action
+
+                dialog.dismiss();
+            }
+        });
+
+        builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                startActivity(new Intent(CalcActivity.this, ThankYouActivity.class));
+                // proceed to submit intent action
+                dialog.dismiss();
+            }
+        });
+
+        AlertDialog alert = builder.create();
+        alert.show();
+    }
+
 
 }
