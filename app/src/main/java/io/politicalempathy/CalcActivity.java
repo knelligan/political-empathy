@@ -2,7 +2,10 @@ package io.politicalempathy;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 
+import android.content.ActivityNotFoundException;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -12,14 +15,23 @@ import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.Point;
 import android.graphics.Rect;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
+import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
+import android.view.TextureView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -49,10 +61,25 @@ public class CalcActivity extends AppCompatActivity {
     //create button interactivity for register button
     private Button takeAgain, submitResults;
 
+    //share the cardview of the results.
+    private CardView resultsView;
+
+    //store the summary results for sharing
+    private String shareSummaryData;
+
+    //lets us know the user was asked to share
+    private boolean shared;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calc);
+
+        //set default shared state
+        shared = false;
+
+        //cardview instance of results
+        resultsView = findViewById(R.id.cardView);
 
         //create interactive response for take again button
         takeAgain = (Button) findViewById(R.id.takeagain);
@@ -72,7 +99,11 @@ public class CalcActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 System.out.println("click is working for submit");
-                dialogShareRequest();
+                if(!shared) {
+                    dialogShareRequest();
+                }else{
+                    startActivity(new Intent(CalcActivity.this, ThankYouActivity.class));
+                }
                 //startActivity(new Intent(CalcActivity.this, ThankYouActivity.class));
             }
         });
@@ -224,8 +255,6 @@ public class CalcActivity extends AppCompatActivity {
         //draw y axis
         canvas.drawLine(500, 0, 500, 1000, paint);
 
-        //draw border of compass
-        //canvas.drawRect(0, 0, 1000, 1000, paint);
 
         //set the drawing stroke/width
         paint.setStyle(Paint.Style.STROKE);
@@ -378,6 +407,7 @@ public class CalcActivity extends AppCompatActivity {
 
         //display a brief summary of results above the compass
         summaryResults.setText(summary);
+        shareSummaryData = summary;
         System.out.println(summary);
 
     }
@@ -385,6 +415,10 @@ public class CalcActivity extends AppCompatActivity {
 
     private void dialogShareRequest() {
         //researched this here: https://stackoverflow.com/questions/2478517/how-to-display-a-yes-no-dialog-box-on-android
+
+        //set shared question flag to true
+        shared = true;
+
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
         builder.setTitle("Share Results");
@@ -394,7 +428,7 @@ public class CalcActivity extends AppCompatActivity {
 
             public void onClick(DialogInterface dialog, int which) {
                 // proceed to share action
-
+                shareResults();
                 dialog.dismiss();
             }
         });
@@ -413,5 +447,58 @@ public class CalcActivity extends AppCompatActivity {
         alert.show();
     }
 
+    private void shareResults() {
+        //researched here: https://stackoverflow.com/questions/30196965/how-to-take-a-screenshot-of-a-current-activity-and-then-share-it
+//researched here: https://www.includehelp.com/android/share-something-on-social-media.aspx
 
+        Context cardviewContext = resultsView.getContext();
+
+        Bitmap cardBitMap = getBitmapFromView(resultsView);
+        Intent intent = new Intent(Intent.ACTION_SEND);
+        intent.setType("*/*");
+
+        String shareMessage = "Here are my results from Political Empathy: ";
+        shareMessage += shareSummaryData + " ";
+        shareMessage += "Download now from: https://politicalempathy.io/";
+
+        intent.putExtra(Intent.EXTRA_TEXT, shareMessage);
+
+        startActivity(Intent.createChooser(intent, "Share results using"));
+
+
+
+//        Bitmap bitmap = Bitmap.createBitmap(resultsView.getWidth(), resultsView.getHeight(),
+//                Bitmap.Config.ARGB_8888);
+//        if (resultsView instanceof CardView) {
+//            bitmap = ((CardView) resultsView).getBitmap();
+//        } else {
+//            Canvas c = new Canvas(bitmap);
+//            resultsView.draw(c);
+//        }
+
+        //new Share(cardviewContext).shareIntent(cardBitMap, "msg", "randomstring");
+
+    }
+
+    public static Bitmap getBitmapFromView(View view) {
+//        view.measure(View.MeasureSpec.UNSPECIFIED, View.MeasureSpec.UNSPECIFIED);
+//        Bitmap bitmap = Bitmap.createBitmap(view.getMeasuredWidth(), view.getMeasuredHeight(),
+//                Bitmap.Config.ARGB_8888);
+//        Canvas canvas = new Canvas(bitmap);
+//        view.layout(0, 0, view.getMeasuredWidth(), view.getMeasuredHeight());
+//        view.draw(canvas);
+//        return bitmap;
+
+//researched here: https://stackoverflow.com/questions/61308719/converting-a-cardview-to-an-image-bitmap
+        int totalHeight = view.getHeight();
+        int totalWidth = view.getWidth();
+        float percent = 0.7f;//use this value to scale bitmap to specific size
+
+        Bitmap canvasBitmap = Bitmap.createBitmap(totalWidth,totalHeight, Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(canvasBitmap);
+        canvas.scale(percent, percent);
+        view.draw(canvas);
+
+        return canvasBitmap;
+    }
 }

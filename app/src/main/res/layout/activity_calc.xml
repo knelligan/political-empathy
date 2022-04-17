@@ -1,164 +1,152 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical"
+
     tools:context=".CalcActivity">
 
-    <LinearLayout
-        android:id="@+id/linearLayoutcalc"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="1dp"
 
-        android:orientation="vertical"
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView"
+        android:layout_width="match_parent"
+        android:layout_height="592dp"
+        android:layout_weight="0.7"
+        app:cardCornerRadius="30dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-            android:id="@+id/finalscore_text"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:padding="8dp"
-            android:text="Final Results"
-            android:textColor="@color/white"
-            android:background="@color/design_default_color_primary"
-            android:textSize="22sp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/economic_bias_score"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:padding="8dp"
-            android:background="@color/lightgray"
-            android:text="Economic Bias:  -2"
-            android:textColor="@color/black"
-            android:textSize="22sp"
-            android:textStyle="bold" />
-        <TextView
-            android:id="@+id/social_bias_score"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:padding="8dp"
-            android:text="Social Bias:         -3"
-            android:textColor="@color/black"
-            android:background="@color/lightgray"
-            android:textSize="22sp"
-            android:textStyle="bold" />
 
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/finalscore_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/design_default_color_primary"
+                android:gravity="center"
+                android:padding="8dp"
+                android:text="Final Results"
+                android:textColor="@color/white"
+                android:textSize="22sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/economic_bias_score"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/lightgray"
+                android:gravity="center"
+                android:padding="8dp"
+                android:text="Economic Bias:  -2"
+                android:textColor="@color/black"
+                android:textSize="22sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/social_bias_score"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/lightgray"
+                android:gravity="center"
+                android:padding="8dp"
+                android:text="Social Bias:         -3"
+                android:textColor="@color/black"
+                android:textSize="22sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/summaryresults"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="12dp"
+                android:text="Here is a summary of your results"
+                android:textSize="16sp" />
+
+            <ImageView
+                android:id="@+id/politicalchart"
+                android:layout_width="wrap_content"
+                android:layout_height="379dp"
+                android:layout_gravity="center"
+                android:contentDescription="politicalcompass"
+                app:srcCompat="@drawable/politicalcompass"
+                tools:ignore="ImageContrastCheck" />
+
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/authoritariantext"
+            android:layout_width="105dp"
+            android:layout_height="40dp"
+            android:text="Authoritarian"
+            android:textAlignment="center"
+            android:layout_marginHorizontal="153dp"
+            android:layout_marginVertical="243dp"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/libertariantext"
+            android:layout_width="105dp"
+            android:layout_height="40dp"
+            android:text="Libertarian"
+            android:textAlignment="center"
+            android:layout_marginHorizontal="153dp"
+            android:layout_marginVertical="553dp"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/rightwingtext"
+            android:layout_width="50dp"
+            android:layout_height="40dp"
+            android:text="Right"
+            android:layout_marginHorizontal="355dp"
+            android:layout_marginVertical="395dp"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/leftwingtext"
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginVertical="395dp"
+            android:text="Left"
+            android:textSize="16sp" />
+    </androidx.cardview.widget.CardView>
+
+    <LinearLayout
+        android:id="@+id/linearLayoutbuttons"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_gravity="center"
+        android:layout_weight="0.3"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/takeagain"
+            android:layout_width="130dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50dp"
+            android:backgroundTint="@color/darkgray"
+            android:text="TAKE AGAIN" />
+
+        <Button
+            android:id="@+id/submit_final_screen"
+            android:layout_width="130dp"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/design_default_color_primary"
+            android:text="Submit " />
     </LinearLayout>
 
 
-    <ImageView
-        android:id="@+id/politicalchart"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:contentDescription="politicalcompass"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayoutcalc"
-        app:srcCompat="@drawable/politicalcompass"
-        tools:ignore="ImageContrastCheck" />
-
-    <TextView
-        android:id="@+id/authoritariantext"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="16sp"
-        android:text="Authoritarian"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.475"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayoutcalc"
-        app:layout_constraintVertical_bias="0.177" />
-
-    <TextView
-        android:id="@+id/libertariantext"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="16sp"
-        android:text="Libertarian"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayoutcalc"
-        app:layout_constraintVertical_bias="0.825" />
-
-    <TextView
-        android:id="@+id/leftwingtext"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="16sp"
-        android:text="Left"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.041"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayoutcalc"
-        app:layout_constraintVertical_bias="0.501" />
-
-    <TextView
-        android:id="@+id/rightwingtext"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="16sp"
-        android:text="Right"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.957"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayoutcalc"
-        app:layout_constraintVertical_bias="0.501" />
-
-    <Button
-        android:id="@+id/takeagain"
-        android:layout_width="130dp"
-        android:layout_height="wrap_content"
-        android:backgroundTint="@color/darkgray"
-        android:text="TAKE AGAIN"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.195"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/libertariantext"
-        app:layout_constraintVertical_bias="0.294" />
-
-    <Button
-        android:id="@+id/submit_final_screen"
-        android:layout_width="130dp"
-        android:layout_height="wrap_content"
-        android:backgroundTint="@color/design_default_color_primary"
-        android:text="Submit "
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.447"
-        app:layout_constraintStart_toEndOf="@+id/takeagain"
-        app:layout_constraintTop_toBottomOf="@+id/libertariantext"
-        app:layout_constraintVertical_bias="0.294" />
-
-    <TextView
-        android:id="@+id/summaryresults"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="12dp"
-        android:text="Here is a summary of your results"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toTopOf="@+id/authoritariantext"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayoutcalc"
-        app:layout_constraintVertical_bias="0.0" />
-
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>
