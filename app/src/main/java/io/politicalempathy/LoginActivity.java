@@ -141,7 +141,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                 //currentlyLoggedInUser = new User(email);
                                 //currentlyLoggedInUser.setUserID(userID);
 
-                                startActivity(new Intent(LoginActivity.this, QuoteActivity.class));
+                                startActivity(new Intent(LoginActivity.this, MainActivity.class));
                             }
 
                             @Override

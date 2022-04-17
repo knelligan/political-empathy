@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PoliticalEmpathy">
         <activity
+            android:name=".ThankYouActivity"
+            android:exported="false" />
+        <activity
             android:name=".AuthorActivity"
             android:exported="false" />
         <activity

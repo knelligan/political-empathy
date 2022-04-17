@@ -45,6 +45,9 @@ public class AuthorActivity extends AppCompatActivity {
 
         //create interactive response for take again button
         nextQuote = (Button) findViewById(R.id.nextquotebutton);
+        if(DbQuery.globalQuoteCounter ==9){
+            nextQuote.setText("See Results");
+        }
         nextQuote.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -69,7 +72,7 @@ public class AuthorActivity extends AppCompatActivity {
         authJob.setText(job);
 
         //set author align
-        String align = DbQuery.globalQuoteList.get(DbQuery.globalQuoteCounter).getBias();
+        String align = "Political alignment: " + DbQuery.globalQuoteList.get(DbQuery.globalQuoteCounter).getBias();
         authAlign.setText(align);
 
 

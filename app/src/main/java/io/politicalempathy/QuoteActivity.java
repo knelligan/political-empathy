@@ -62,7 +62,7 @@ public class QuoteActivity extends AppCompatActivity implements View.OnClickList
 //        quoteNum.setText(DbQuery.globalQuoteList.get(DbQuery.globalQuoteCounter).getQuoteID());
 //        quoteText.setText(DbQuery.globalQuoteList.get(DbQuery.globalQuoteCounter).getQuoteText());
 
-        if (DbQuery.globalQuoteCounter < DbQuery.globalQuoteList.size() ) {
+        if (DbQuery.globalQuoteCounter < DbQuery.globalQuoteList.size()) {
             System.out.println("quote counter is: " + DbQuery.globalQuoteCounter + " quotelistsize: " + DbQuery.globalQuoteList.size());
             //update the quote number at the top
             quoteNum.setText("Quote " + String.valueOf(DbQuery.globalQuoteCounter + 1));
@@ -126,7 +126,6 @@ public class QuoteActivity extends AppCompatActivity implements View.OnClickList
         });
 
 
-
         //creates a small delay after selction
         Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
@@ -141,7 +140,7 @@ public class QuoteActivity extends AppCompatActivity implements View.OnClickList
         displayAuthor();
     }
 
-    private void displayAuthor(){
+    private void displayAuthor() {
         Intent intent = new Intent(QuoteActivity.this, AuthorActivity.class);
         startActivity(intent);
     }

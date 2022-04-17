@@ -23,6 +23,9 @@ import java.util.List;
 
 public class CalcActivity extends AppCompatActivity {
 
+    /* Textview for summary of results */
+    private TextView summaryResults;
+
     /* Textview for the economic score */
     private TextView econScore;
 
@@ -42,7 +45,7 @@ public class CalcActivity extends AppCompatActivity {
     private Bitmap bitmap;
 
     //create button interactivity for register button
-    private Button takeAgain;
+    private Button takeAgain, submitResults;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +54,7 @@ public class CalcActivity extends AppCompatActivity {
 
         //create interactive response for take again button
         takeAgain = (Button) findViewById(R.id.takeagain);
+        submitResults = (Button) findViewById(R.id.submit_final_screen);
         takeAgain.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -62,12 +66,47 @@ public class CalcActivity extends AppCompatActivity {
                 startActivity(new Intent(CalcActivity.this, QuoteActivity.class));
             }
         });
+        submitResults.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                System.out.println("click is working for submit");
+                startActivity(new Intent(CalcActivity.this, ThankYouActivity.class));
+            }
+        });
+
+//        takeAgain.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                //clear response list to store fresh results
+//                DbQuery.globalResponseList.clear();
+//
+//                //reset the quote counter to 0 to display survey from start
+//                DbQuery.globalQuoteCounter = 0;
+//                startActivity(new Intent(CalcActivity.this, QuoteActivity.class));
+//            }
+//        });
+
+        //create interactive response for take again button
+        submitResults = (Button) findViewById(R.id.submit_final_screen);
+//        submitResults.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                //clear response list to store fresh results
+//                //DbQuery.globalResponseList.clear();
+//
+//                //reset the quote counter to 0 to display survey from start
+//                //DbQuery.globalQuoteCounter = 0;
+//                startActivity(new Intent(CalcActivity.this, FinalActivity.class));
+//            }
+//        });
+
 
         //researched plotting values here: https://programmerworld.co/android/how-to-plot-arrays-x-and-y-coordinates-on-axes-in-your-android-app-without-using-dependencies-or-libraries/
 
         //TextView value updates
         econScore = findViewById(R.id.economic_bias_score);
         socScore = findViewById(R.id.social_bias_score);
+        summaryResults = findViewById(R.id.summaryresults);
 
         //update image value
         compass = findViewById(R.id.politicalchart);
@@ -78,8 +117,10 @@ public class CalcActivity extends AppCompatActivity {
         //plot the value on the compass
         plotValue();
 
-    }
+        //create summary results
+        writeSummaryResults();
 
+    }
 
 
     public void scoreCalculations() {
@@ -99,11 +140,11 @@ public class CalcActivity extends AppCompatActivity {
             //local variable for the current response of the user in the arraylist to
             //to grab each response from
             response = DbQuery.globalResponseList.get(i);
-            if(response.getType().equals("Economic")){
+            if (response.getType().equals("Economic")) {
                 //type is economic
                 econCount++;
                 econTotal += response.getResponseValue();
-            }else{
+            } else {
                 //type is social
                 socCount++;
                 socTotal += response.getResponseValue();
@@ -112,20 +153,20 @@ public class CalcActivity extends AppCompatActivity {
         //here is where i will store the econ/soc in user class----------------------------------------------------------------------------------------------
         //calculate econ score by finding the average of the
         //economic responses
-        double avgEcon = Math.round(econTotal/econCount);
+        double avgEcon = Math.round(econTotal / econCount);
         //LoginActivity.currentlyLoggedInUser.setEconScore(avgEcon);
 
 
         //calculate the social score by finding the average of
         //the social responses
-        double avgSoc = Math.round(socTotal/socCount);
+        double avgSoc = Math.round(socTotal / socCount);
         //LoginActivity.currentlyLoggedInUser.setSocialScore(avgSoc);
 
 
         //cast the score value to int to make the score easier to understand/read
 
-        econScoreValue = (int)avgEcon;
-        socScoreValue = (int)avgSoc;
+        econScoreValue = (int) avgEcon;
+        socScoreValue = (int) avgSoc;
 
 
     }
@@ -272,5 +313,95 @@ public class CalcActivity extends AppCompatActivity {
         return new Point(x, y);
     }
 
+    public void writeSummaryResults() {
+        boolean econModerate;
+        boolean socialModerate;
+        boolean overallModerate;
+
+        if (econScoreValue > -5 && econScoreValue < 5) {
+            econModerate = true;
+        } else {
+            econModerate = false;
+        }
+        if (socScoreValue > -5 && socScoreValue < 5) {
+            socialModerate = true;
+        } else {
+            socialModerate = false;
+        }
+
+        if (econModerate && socialModerate) {
+            overallModerate = true;
+        } else {
+            overallModerate = false;
+        }
+
+        String summary = "Summary: Your economic views are ";
+
+        //perfectly moderate-----------------------------------------
+        if (econScoreValue == 0) {
+            summary += "evenly balanced between left and right, and ";
+
+            //left leaning-----------------------------------------
+        } else if (econScoreValue < 0 && econScoreValue >= -2) {
+            summary += "barely left-leaning and ";
+        } else if (econScoreValue < -2 && econScoreValue >= -5) {
+            //{-5 to > 1} moderate left economic
+            summary += "moderately left-leaning and ";
+        } else if (econScoreValue < -5 && econScoreValue >= -8) {
+            //{-9 to -6} moderate left economic
+            summary += "strongly left-leaning and ";
+        } else if (econScoreValue < -8) {
+            summary += "extremely left-leaning and ";
+
+            //right leaning -----------------------------------------
+        } else if (econScoreValue > 0 && econScoreValue <= 2) {
+            summary += "barely right-leaning and ";
+        } else if (econScoreValue > 2 && econScoreValue <= 5) {
+            //{-5 to > 1} moderate left economic
+            summary += "moderately right-leaning and ";
+        } else if (econScoreValue > 5 && econScoreValue <= 8) {
+            //{-9 to -6} moderate left economic
+            summary += "strongly right-leaning and ";
+        } else if (econScoreValue > 8) {
+            summary += "extremely right-leaning and ";
+        }
+
+        //add social score preface
+        summary += "your social views are ";
+
+        //perfectly moderate-----------------------------------------
+        if (socScoreValue == 0) {
+            summary += "evenly balanced between authoritarian and libertarian.";
+
+            //left leaning-----------------------------------------
+        } else if (socScoreValue < 0 && socScoreValue >= -2) {
+            summary += "slightly libertarian-leaning.";
+        } else if (socScoreValue < -2 && socScoreValue >= -5) {
+            //{-5 to > 1} moderate libertarian
+            summary += "moderately libertarian.";
+        } else if (socScoreValue < -5 && socScoreValue >= -8) {
+            //{-9 to -6} moderate libertarian
+            summary += "strongly libertarian.";
+        } else if (socScoreValue < -8) {
+            summary += "extremely libertarian.";
+
+            //right leaning -----------------------------------------
+        } else if (socScoreValue > 0 && socScoreValue <= 2) {
+            summary += "slightly authoritarian.";
+        } else if (socScoreValue > 2 && socScoreValue <= 5) {
+            //{-5 to > 1} moderate authoritarian
+            summary += "moderately authoritarian.";
+        } else if (socScoreValue > 5 && socScoreValue <= 8) {
+            //{-9 to -6} moderate authoritarian
+            summary += "strongly authoritarian.";
+        } else if (socScoreValue > 8) {
+            summary += "extremely authoritarian.";
+        }
+
+        //display a brief summary of results above the compass
+        summaryResults.setText(summary);
+        System.out.println(summary);
+
+    }
 
 }

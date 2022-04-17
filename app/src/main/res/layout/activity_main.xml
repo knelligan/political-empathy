@@ -17,7 +17,7 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.316"
+        app:layout_constraintVertical_bias="0.059"
         app:srcCompat="@drawable/fullwhiteicon" />
 
     <TextView
@@ -34,23 +34,69 @@
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView2"
-        app:layout_constraintVertical_bias="0.103" />
+        app:layout_constraintVertical_bias="0.049" />
 
-    <Button
-        android:id="@+id/main_startButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginBottom="52dp"
-        android:background="@drawable/round_corner"
-        android:text="@string/start"
-
-        android:textSize="20sp"
-        android:textStyle="bold"
-        android:textColor="@color/white"
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="450dp"
+        android:background="@color/lightgray"
+        android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/main_title"
+        app:layout_constraintVertical_bias="1.0"
+        tools:layout_editor_absoluteX="0dp">
+
+        <TextView
+            android:id="@+id/aboutheader"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:textStyle="bold"
+            android:textColor="@color/design_default_color_primary"
+            android:paddingLeft="18dp"
+            android:paddingTop="18dp"
+            android:paddingRight="18dp"
+            android:textSize="20dp"
+            android:text="ABOUT US" />
+        <TextView
+            android:id="@+id/aboutus"
+            android:layout_width="wrap_content"
+            android:layout_height="140dp"
+            android:paddingLeft="18dp"
+            android:paddingBottom="18dp"
+            android:paddingRight="18dp"
+            android:textSize="18dp"
+            android:text="The purpose of this app is to highlight and draw attention to our political bias, and hopefully help us find common ground with counterparts on the opposite side of the political spectrum." />
+        <TextView
+            android:id="@+id/howtoheader"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:textStyle="bold"
+            android:textColor="@color/design_default_color_primary"
+            android:paddingLeft="18dp"
+            android:paddingRight="18dp"
+            android:textSize="20dp"
+            android:text="INSTRUCTIONS" />
+        <TextView
+            android:id="@+id/aboutsurvey"
+            android:layout_width="wrap_content"
+            android:layout_height="140dp"
+            android:paddingLeft="18dp"
+            android:paddingBottom="18dp"
+            android:paddingRight="18dp"
+            android:textSize="18dp"
+            android:text="In the following survey, indicate whether you agree or disagree with the statement.  You might be surprised by how the author's statement comports with your understanding of their views and poliical alignment." />
+        <Button
+            android:id="@+id/main_startButton"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="150dp"
+            android:layout_marginRight="150dp"
+            android:gravity="center"
+            android:foregroundGravity="center"
+            android:backgroundTint="@color/design_default_color_primary"
+            android:text="start" />
+
+
+    </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
