@@ -99,9 +99,15 @@ public class CalcActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 System.out.println("click is working for submit");
-                if(!shared) {
+                if (!shared) {
                     dialogShareRequest();
-                }else{
+                } else {
+                    //clear response list to store fresh results
+                    DbQuery.globalResponseList.clear();
+
+                    //reset the quote counter to 0 to display survey from start
+                    DbQuery.globalQuoteCounter = 0;
+
                     startActivity(new Intent(CalcActivity.this, ThankYouActivity.class));
                 }
                 //startActivity(new Intent(CalcActivity.this, ThankYouActivity.class));
@@ -127,7 +133,6 @@ public class CalcActivity extends AppCompatActivity {
 
         //create summary results
         writeSummaryResults();
-
 
 
     }
@@ -427,6 +432,12 @@ public class CalcActivity extends AppCompatActivity {
         builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
 
             public void onClick(DialogInterface dialog, int which) {
+                //clear response list to store fresh results
+                DbQuery.globalResponseList.clear();
+
+                //reset the quote counter to 0 to display survey from start
+                DbQuery.globalQuoteCounter = 0;
+
                 // proceed to share action
                 shareResults();
                 dialog.dismiss();
@@ -437,6 +448,12 @@ public class CalcActivity extends AppCompatActivity {
 
             @Override
             public void onClick(DialogInterface dialog, int which) {
+                //clear response list to store fresh results
+                DbQuery.globalResponseList.clear();
+
+                //reset the quote counter to 0 to display survey from start
+                DbQuery.globalQuoteCounter = 0;
+
                 startActivity(new Intent(CalcActivity.this, ThankYouActivity.class));
                 // proceed to submit intent action
                 dialog.dismiss();
@@ -453,7 +470,7 @@ public class CalcActivity extends AppCompatActivity {
 
         Context cardviewContext = resultsView.getContext();
 
-        Bitmap cardBitMap = getBitmapFromView(resultsView);
+        //Bitmap cardBitMap = getBitmapFromView(resultsView);
         Intent intent = new Intent(Intent.ACTION_SEND);
         intent.setType("*/*");
 
@@ -464,41 +481,42 @@ public class CalcActivity extends AppCompatActivity {
         intent.putExtra(Intent.EXTRA_TEXT, shareMessage);
 
         startActivity(Intent.createChooser(intent, "Share results using"));
-
-
-
-//        Bitmap bitmap = Bitmap.createBitmap(resultsView.getWidth(), resultsView.getHeight(),
-//                Bitmap.Config.ARGB_8888);
-//        if (resultsView instanceof CardView) {
-//            bitmap = ((CardView) resultsView).getBitmap();
-//        } else {
-//            Canvas c = new Canvas(bitmap);
-//            resultsView.draw(c);
-//        }
-
-        //new Share(cardviewContext).shareIntent(cardBitMap, "msg", "randomstring");
-
-    }
-
-    public static Bitmap getBitmapFromView(View view) {
-//        view.measure(View.MeasureSpec.UNSPECIFIED, View.MeasureSpec.UNSPECIFIED);
-//        Bitmap bitmap = Bitmap.createBitmap(view.getMeasuredWidth(), view.getMeasuredHeight(),
-//                Bitmap.Config.ARGB_8888);
-//        Canvas canvas = new Canvas(bitmap);
-//        view.layout(0, 0, view.getMeasuredWidth(), view.getMeasuredHeight());
-//        view.draw(canvas);
-//        return bitmap;
-
-//researched here: https://stackoverflow.com/questions/61308719/converting-a-cardview-to-an-image-bitmap
-        int totalHeight = view.getHeight();
-        int totalWidth = view.getWidth();
-        float percent = 0.7f;//use this value to scale bitmap to specific size
-
-        Bitmap canvasBitmap = Bitmap.createBitmap(totalWidth,totalHeight, Bitmap.Config.ARGB_8888);
-        Canvas canvas = new Canvas(canvasBitmap);
-        canvas.scale(percent, percent);
-        view.draw(canvas);
-
-        return canvasBitmap;
     }
 }
+
+//
+////        Bitmap bitmap = Bitmap.createBitmap(resultsView.getWidth(), resultsView.getHeight(),
+////                Bitmap.Config.ARGB_8888);
+////        if (resultsView instanceof CardView) {
+////            bitmap = ((CardView) resultsView).getBitmap();
+////        } else {
+////            Canvas c = new Canvas(bitmap);
+////            resultsView.draw(c);
+////        }
+//
+//        //new Share(cardviewContext).shareIntent(cardBitMap, "msg", "randomstring");
+//
+//    }
+//
+////    public static Bitmap getBitmapFromView(View view) {
+//////        view.measure(View.MeasureSpec.UNSPECIFIED, View.MeasureSpec.UNSPECIFIED);
+//////        Bitmap bitmap = Bitmap.createBitmap(view.getMeasuredWidth(), view.getMeasuredHeight(),
+//////                Bitmap.Config.ARGB_8888);
+//////        Canvas canvas = new Canvas(bitmap);
+//////        view.layout(0, 0, view.getMeasuredWidth(), view.getMeasuredHeight());
+//////        view.draw(canvas);
+//////        return bitmap;
+////
+//////researched here: https://stackoverflow.com/questions/61308719/converting-a-cardview-to-an-image-bitmap
+////        int totalHeight = view.getHeight();
+////        int totalWidth = view.getWidth();
+////        float percent = 0.7f;//use this value to scale bitmap to specific size
+////
+////        Bitmap canvasBitmap = Bitmap.createBitmap(totalWidth,totalHeight, Bitmap.Config.ARGB_8888);
+////        Canvas canvas = new Canvas(canvasBitmap);
+////        canvas.scale(percent, percent);
+////        view.draw(canvas);
+////
+////        return canvasBitmap;
+////    }
+//}

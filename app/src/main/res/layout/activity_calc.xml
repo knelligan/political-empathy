@@ -15,7 +15,7 @@
         android:layout_width="match_parent"
         android:layout_height="592dp"
         android:layout_weight="0.7"
-        app:cardCornerRadius="30dp"
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -70,7 +70,7 @@
                 android:layout_height="wrap_content"
                 android:padding="12dp"
                 android:text="Here is a summary of your results"
-                android:textSize="16sp" />
+                android:textSize="18sp" />
 
             <ImageView
                 android:id="@+id/politicalchart"
@@ -101,7 +101,7 @@
             android:text="Libertarian"
             android:textAlignment="center"
             android:layout_marginHorizontal="153dp"
-            android:layout_marginVertical="553dp"
+            android:layout_marginVertical="563dp"
             android:textSize="16sp" />
 
         <TextView
@@ -110,7 +110,7 @@
             android:layout_height="40dp"
             android:text="Right"
             android:layout_marginHorizontal="355dp"
-            android:layout_marginVertical="395dp"
+            android:layout_marginVertical="405dp"
             android:textSize="16sp" />
 
         <TextView
@@ -118,7 +118,7 @@
             android:layout_width="100dp"
             android:layout_height="40dp"
             android:layout_marginHorizontal="16dp"
-            android:layout_marginVertical="395dp"
+            android:layout_marginVertical="405dp"
             android:text="Left"
             android:textSize="16sp" />
     </androidx.cardview.widget.CardView>
