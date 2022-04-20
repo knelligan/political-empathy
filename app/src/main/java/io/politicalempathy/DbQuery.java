@@ -35,6 +35,15 @@ public class DbQuery {
     /* User ID to be used for response list */
     public static int globalQuoteCounter;
 
+    /* User ID to be used for response list */
+    public static int globalEconScore;
+
+    /* User ID to be used for response list */
+    public static int globalSocScore;
+
+    /* User ID to be used for response list */
+    public static ArrayList<Integer> globalPreviousResponses;
+
     /* Default user response value */
     public static final double DEFAULT_VALUE = -100.0;
 
@@ -215,65 +224,57 @@ public class DbQuery {
 
 
         //add user selected responses
-        if(globalResponseList.size() > 0 && globalResponseList.get(0) != null) {
+        if (globalResponseList.size() > 0 && globalResponseList.get(0) != null) {
             userResponses.put("Q1_RESP", globalResponseList.get(0).getResponseValue());
-        }else{
+        } else {
             userResponses.put("Q1_RESP", DEFAULT_VALUE);
         }
-        if(globalResponseList.size() > 1 && globalResponseList.get(1) != null) {
+        if (globalResponseList.size() > 1 && globalResponseList.get(1) != null) {
             userResponses.put("Q2_RESP", globalResponseList.get(1).getResponseValue());
-        }else{
+        } else {
             userResponses.put("Q2_RESP", DEFAULT_VALUE);
         }
-        if(globalResponseList.size() > 2 && globalResponseList.get(2) != null) {
+        if (globalResponseList.size() > 2 && globalResponseList.get(2) != null) {
             userResponses.put("Q3_RESP", globalResponseList.get(2).getResponseValue());
-        }else{
+        } else {
             userResponses.put("Q3_RESP", DEFAULT_VALUE);
         }
-        if(globalResponseList.size() > 3 && globalResponseList.get(3) != null) {
+        if (globalResponseList.size() > 3 && globalResponseList.get(3) != null) {
             userResponses.put("Q4_RESP", globalResponseList.get(3).getResponseValue());
-        }else{
+        } else {
             userResponses.put("Q4_RESP", DEFAULT_VALUE);
         }
-        if(globalResponseList.size() > 4 && globalResponseList.get(4) != null) {
+        if (globalResponseList.size() > 4 && globalResponseList.get(4) != null) {
             userResponses.put("Q5_RESP", globalResponseList.get(4).getResponseValue());
-        }else{
+        } else {
             userResponses.put("Q5_RESP", DEFAULT_VALUE);
         }
-        if(globalResponseList.size() > 5 && globalResponseList.get(5) != null) {
+        if (globalResponseList.size() > 5 && globalResponseList.get(5) != null) {
             userResponses.put("Q6_RESP", globalResponseList.get(5).getResponseValue());
-        }else{
+        } else {
             userResponses.put("Q6_RESP", DEFAULT_VALUE);
         }
-        if(globalResponseList.size() > 6 && globalResponseList.get(6) != null) {
+        if (globalResponseList.size() > 6 && globalResponseList.get(6) != null) {
             userResponses.put("Q7_RESP", globalResponseList.get(6).getResponseValue());
-        }else{
+        } else {
             userResponses.put("Q7_RESP", DEFAULT_VALUE);
         }
-        if(globalResponseList.size() > 7 && globalResponseList.get(7) != null) {
+        if (globalResponseList.size() > 7 && globalResponseList.get(7) != null) {
             userResponses.put("Q8_RESP", globalResponseList.get(7).getResponseValue());
-        }else{
+        } else {
             userResponses.put("Q8_RESP", DEFAULT_VALUE);
         }
-        if(globalResponseList.size() > 8 && globalResponseList.get(8) != null) {
+        if (globalResponseList.size() > 8 && globalResponseList.get(8) != null) {
             userResponses.put("Q9_RESP", globalResponseList.get(8).getResponseValue());
-        }else{
+        } else {
             userResponses.put("Q9_RESP", DEFAULT_VALUE);
         }
-        if(globalResponseList.size() > 9 && globalResponseList.get(9) != null) {
+        if (globalResponseList.size() > 9 && globalResponseList.get(9) != null) {
             userResponses.put("Q10_RESP", globalResponseList.get(9).getResponseValue());
-        }else{
+        } else {
             userResponses.put("Q10_RESP", DEFAULT_VALUE);
         }
-//        userResponses.put("Q2_RESP", LoginActivity.currentlyLoggedInUser.getQ2Resp());
-//        userResponses.put("Q3_RESP", LoginActivity.currentlyLoggedInUser.getQ3Resp());
-//        userResponses.put("Q4_RESP", LoginActivity.currentlyLoggedInUser.getQ4Resp());
-//        userResponses.put("Q5_RESP", LoginActivity.currentlyLoggedInUser.getQ5Resp());
-//        userResponses.put("Q6_RESP", LoginActivity.currentlyLoggedInUser.getQ6Resp());
-//        userResponses.put("Q7_RESP", LoginActivity.currentlyLoggedInUser.getQ7Resp());
-//        userResponses.put("Q8_RESP", LoginActivity.currentlyLoggedInUser.getQ8Resp());
-//        userResponses.put("Q9_RESP", LoginActivity.currentlyLoggedInUser.getQ9Resp());
-//        userResponses.put("Q10_RESP", LoginActivity.currentlyLoggedInUser.getQ10Resp());
+
 
         //researched here: https://stackoverflow.com/questions/53129967/how-to-pass-a-firestore-document-reference-for-a-collection-made-in-mainactivity
         //Create a document reference for the user response data in firestore
@@ -305,9 +306,78 @@ public class DbQuery {
     }
 
 
-//    public static void loadDefaultResponses(){
-//        for(int i = 0; i < 10; i++){
-//
-//        }
-//    }
+    public static void loadPreviousData(CompleteListener completeListener) {
+
+        globalPreviousResponses = new ArrayList<>();
+
+        //create global user id to be used in response objects
+        FirebaseUser currentFirebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+        String tempUserID = currentFirebaseUser.getUid();
+        System.out.println("user id for fetch data is: " + globalUserID);
+
+        //load responses from db
+        globalFirestore.collection("RESPONSES").get()
+                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                    @Override
+                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+
+                        //if successful, create a map to store documents retrieved from firebase
+                        Map<String, QueryDocumentSnapshot> documentList = new ArrayMap<>();
+
+                        //add each document to the map
+                        for (QueryDocumentSnapshot document : queryDocumentSnapshots) {
+                            //put the document id and the document in the map as a key/value pair
+                            documentList.put(document.getId(), document);
+                        }
+                        //check if document exists
+
+                        if(documentList.containsKey(tempUserID)) {
+                            //get the previous user response
+                            QueryDocumentSnapshot userResponses = documentList.get(tempUserID);
+
+                            //add response 1
+                            globalPreviousResponses.add(userResponses.getLong("Q1_RESP").intValue());
+
+                            //add response 2
+                            globalPreviousResponses.add(userResponses.getLong("Q2_RESP").intValue());
+
+                            //add response 3
+                            globalPreviousResponses.add(userResponses.getLong("Q3_RESP").intValue());
+
+                            //add response 4
+                            globalPreviousResponses.add(userResponses.getLong("Q4_RESP").intValue());
+
+                            //add response 5
+                            globalPreviousResponses.add(userResponses.getLong("Q5_RESP").intValue());
+
+                            //add response 6
+                            globalPreviousResponses.add(userResponses.getLong("Q6_RESP").intValue());
+
+                            //add response 7
+                            globalPreviousResponses.add(userResponses.getLong("Q7_RESP").intValue());
+
+                            //add response 8
+                            globalPreviousResponses.add(userResponses.getLong("Q8_RESP").intValue());
+
+                            //add response 9
+                            globalPreviousResponses.add(userResponses.getLong("Q9_RESP").intValue());
+
+                            //add response 10
+                            globalPreviousResponses.add(userResponses.getLong("Q10_RESP").intValue());
+                        }
+
+                        //invoke the complete listener interface based on a successful access of the database
+                        completeListener.onSuccess();
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        //invoke the complete listener interface based on a failure to access the database properly
+                        completeListener.onFailure();
+                    }
+                });
+
+
+    }
 }

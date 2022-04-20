@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PoliticalEmpathy">
         <activity
+            android:name=".ComparisonActivity"
+            android:exported="false" />
+        <activity
             android:name=".ThankYouActivity"
             android:exported="false" />
         <activity
@@ -24,7 +27,6 @@
         <activity
             android:name=".LoginActivity"
             android:exported="false" />
-
         <activity
             android:name=".CalcActivity"
             android:exported="false" />
@@ -52,8 +54,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-
     </application>
 
 </manifest>

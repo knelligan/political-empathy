@@ -50,10 +50,10 @@ public class CalcActivity extends AppCompatActivity {
     private ImageView compass;
 
     /* Economic score value (x val) */
-    private int econScoreValue;
+    public int econScoreValue;
 
     /* Social score value (y val) */
-    private int socScoreValue;
+    public int socScoreValue;
 
     /* Bitmap object used for drawing */
     private Bitmap bitmap;
@@ -108,7 +108,8 @@ public class CalcActivity extends AppCompatActivity {
                     //reset the quote counter to 0 to display survey from start
                     DbQuery.globalQuoteCounter = 0;
 
-                    startActivity(new Intent(CalcActivity.this, ThankYouActivity.class));
+                    //startActivity(new Intent(CalcActivity.this, ThankYouActivity.class));
+                    startActivity(new Intent(CalcActivity.this, ComparisonActivity.class));
                 }
                 //startActivity(new Intent(CalcActivity.this, ThankYouActivity.class));
             }
@@ -178,9 +179,13 @@ public class CalcActivity extends AppCompatActivity {
 
 
         //cast the score value to int to make the score easier to understand/read
-
         econScoreValue = (int) avgEcon;
+        //set the global econ
+        DbQuery.globalEconScore = econScoreValue;
+
         socScoreValue = (int) avgSoc;
+        //set the global soc
+        DbQuery.globalSocScore = socScoreValue;
 
 
     }
@@ -454,7 +459,7 @@ public class CalcActivity extends AppCompatActivity {
                 //reset the quote counter to 0 to display survey from start
                 DbQuery.globalQuoteCounter = 0;
 
-                startActivity(new Intent(CalcActivity.this, ThankYouActivity.class));
+                startActivity(new Intent(CalcActivity.this, ComparisonActivity.class));
                 // proceed to submit intent action
                 dialog.dismiss();
             }

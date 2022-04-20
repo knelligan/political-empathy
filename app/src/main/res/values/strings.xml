@@ -1,5 +1,20 @@
 <resources>
+
     <string name="app_name">Political Empathy</string>
+
+    <string-array name = "authors">
+        <item>Jimmy Carter</item>
+        <item>Bill Clinton</item>
+        <item>John F. Kennedy</item>
+        <item>Abraham Lincoln</item>
+        <item>Barack Obama</item>
+        <item>Rand Paul</item>
+        <item>Ronald Reagan</item>
+        <item>Theodore Roosevelt</item>
+        <item>Marco Rubio</item>
+        <item>Bernie Sanders</item>
+    </string-array>
+
     <string name="start">Start</string>
     <string name="political_empathy">Political Empathy</string>
     <string name="logo_arrows">logo arrows</string>

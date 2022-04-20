@@ -20,6 +20,22 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         //setContentView(R.layout.activity_login2);
 
+//        //try to load old responses
+//        DbQuery.loadPreviousData(new CompleteListener() {
+//            @Override
+//            public void onSuccess() {
+//                System.out.println("loaded user data successfully");
+//                for(Integer i: DbQuery.globalPreviousResponses){
+//                    System.out.println(i);
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure() {
+//                System.out.println("failed to load user data");
+//            }
+//        });
+
         //create variable to access title text (to change font)
         title = findViewById((R.id.main_title));
 
@@ -32,6 +48,8 @@ public class MainActivity extends AppCompatActivity {
 
         //set the action for clicking the start button
         start.setOnClickListener(new View.OnClickListener(){
+
+
 
             @Override
             public void onClick(View view) {

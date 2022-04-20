@@ -12,14 +12,14 @@
         android:id="@+id/logotextthin"
         android:layout_width="match_parent"
         android:layout_height="140dp"
-        android:background="@color/design_default_color_primary"
+        android:background="@drawable/gradient_background"
+
         android:fontFamily="@font/barlowboldx"
         android:paddingTop="70dp"
         android:text="@string/politicalempathylogoregister"
         android:textAlignment="center"
         android:textColor="@color/white"
         android:textSize="40sp"
-        android:textStyle="bold"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"
 

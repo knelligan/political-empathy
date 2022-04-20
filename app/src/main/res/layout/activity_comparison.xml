@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ComparisonActivity">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/lightgray"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/titlecompareresults"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:background="@color/design_default_color_primary"
+            android:fontFamily="@font/barlowboldx"
+            android:paddingTop="15dp"
+            android:text="COMPARE RESULTS"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="25sp" />
+
+        <Spinner
+            android:id="@+id/spinner1"
+            android:layout_width="match_parent"
+
+            android:textSize="20sp"
+            android:layout_height="40dp" />
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="15dp" />
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:background="@color/design_default_color_primary"
+            app:cardCornerRadius="40dp"
+            android:layout_marginHorizontal="20dp"
+
+            android:layout_gravity="center"
+            android:layout_height="205dp" >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/authortitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:gravity="center"
+                    android:padding="8dp"
+                    android:textColor="@color/design_default_color_primary"
+                    android:textStyle="bold"
+                    android:text="Author Name"
+                    android:textSize="25sp" />
+
+                <TextView
+                    android:id="@+id/authoreconscore"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:gravity="center"
+                    android:padding="8dp"
+                    android:text="Econ Score: "
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/authorsocscore"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:layout_marginTop="20dp"
+                    android:padding="8dp"
+                    android:text="Socal Score: "
+                    android:textSize="20sp" />
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="15dp" />
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_gravity="center"
+            android:layout_marginHorizontal="20dp"
+            app:cardCornerRadius="40dp"
+            android:layout_height="205dp" >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/usertitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:gravity="center"
+                    android:padding="8dp"
+                    android:textColor="@color/design_default_color_primary"
+                    android:textStyle="bold"
+                    android:text="Your Score"
+                    android:textSize="25sp" />
+
+                <TextView
+                    android:id="@+id/usereconscore"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:gravity="center"
+                    android:padding="8dp"
+                    android:text="Econ Score: "
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/usersocscore"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:layout_marginTop="20dp"
+                    android:padding="8dp"
+                    android:text="Socal Score: "
+                    android:textSize="20sp" />
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="15dp" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/takeagaincompare"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="25dp"
+                android:backgroundTint="@color/design_default_color_primary"
+                android:layout_weight="1"
+                android:text="Take again" />
+
+            <Button
+                android:id="@+id/logoutcompare"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="25dp"
+                android:backgroundTint="@color/black"
+                android:layout_weight="1"
+                android:text="Log out" />
+        </LinearLayout>
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
