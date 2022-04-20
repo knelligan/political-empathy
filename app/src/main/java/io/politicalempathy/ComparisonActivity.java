@@ -133,26 +133,26 @@ public class ComparisonActivity extends AppCompatActivity implements AdapterView
 
         } else if (selectedText.equals("Ronald Reagan")) {
             //set carter's text fields
-            authorTitle.setText("Jimmy Carter");
+            authorTitle.setText("Ronald Reagan");
             authorEconScore.setText("Economic Score: 6");
             authorSocScore.setText("Social Score: 6");
 
         } else if (selectedText.equals("Theodore Roosevelt")) {
             //set carter's text fields
-            authorTitle.setText("Jimmy Carter");
+            authorTitle.setText("Theodore Roosevelt");
             authorEconScore.setText("Economic Score: 0");
             authorSocScore.setText("Social Score: 5");
 
 
         } else if (selectedText.equals("Marco Rubio")) {
             //set carter's text fields
-            authorTitle.setText("Jimmy Carter");
+            authorTitle.setText("Marco Rubio");
             authorEconScore.setText("Economic Score: 3");
             authorSocScore.setText("Social Score: 4");
 
         } else if (selectedText.equals("Bernie Sanders")) {
             //set carter's text fields
-            authorTitle.setText("Jimmy Carter");
+            authorTitle.setText("Bernie Sanders");
             authorEconScore.setText("Economic Score: 9");
             authorSocScore.setText("Social Score: -7");
 
