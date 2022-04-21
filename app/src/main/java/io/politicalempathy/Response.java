@@ -13,6 +13,7 @@ public class Response {
 
 
     /**
+     * Response object to store user responses
      * @param userID
      * @param quoteID
      * @param responseNum

@@ -11,16 +11,16 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 public class AuthorActivity extends AppCompatActivity {
-    /* ImageView for the political compass image used */
+    /* ImageView for the author*/
     private ImageView authorImage;
 
-    /* Textview for the economic score */
+    /* Textview for the author's name */
     private TextView authName;
 
-    /* Textview for the social score */
+    /* Textview for the author's job/role in politics */
     private TextView authJob;
 
-    /* Textview for the social score */
+    /* Textview for the author's political alignment */
     private TextView authAlign;
 
     //create button interactivity for register button
@@ -39,13 +39,19 @@ public class AuthorActivity extends AppCompatActivity {
         //update image value
         authorImage = findViewById(R.id.authorimage);
 
+        //calls a method to set the author text
+        //based on which politician was quoted
         setAuthorText();
 
+        //calls a method to determine which author's image
+        //should be displayed
         setAuthorImage();
 
-        //create interactive response for take again button
+        //create interactive response for the next quote button
         nextQuote = (Button) findViewById(R.id.nextquotebutton);
         if(DbQuery.globalQuoteCounter ==9){
+            //change the text displayed on the button
+            //if it is the last survey quote displayed
             nextQuote.setText("See Results");
         }
         nextQuote.setOnClickListener(new View.OnClickListener() {
@@ -59,9 +65,12 @@ public class AuthorActivity extends AppCompatActivity {
             }
         });
 
-
-
     }
+
+    /**
+     * Sets the author's name and information appropriately based on whose
+     * quote was used
+     */
     public void setAuthorText(){
         //set author name
         String name = DbQuery.globalQuoteList.get(DbQuery.globalQuoteCounter).getAuthor();
@@ -78,6 +87,9 @@ public class AuthorActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * Sets the politicians image based on the correct politician quoted previously
+     */
     public void setAuthorImage(){
 
         String name = DbQuery.globalQuoteList.get(DbQuery.globalQuoteCounter).getAuthor();

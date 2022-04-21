@@ -18,6 +18,7 @@ public class Share {
         this.context = context;
     }
     //researched this here:https://stackoverflow.com/questions/30196965/how-to-take-a-screenshot-of-a-current-activity-and-then-share-it
+    //attempted to implement this method but it would require additional editing and research
 
     public void shareIntent(Bitmap bitmap, String msg, String name) {
         Uri uri = screenshotForShare(bitmap, name);

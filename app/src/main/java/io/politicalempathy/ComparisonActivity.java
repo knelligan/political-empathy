@@ -90,6 +90,7 @@ public class ComparisonActivity extends AppCompatActivity implements AdapterView
 
     }
 
+
     public void displayScore(String selectedText) {
 
         if (selectedText.equals("Jimmy Carter")) {

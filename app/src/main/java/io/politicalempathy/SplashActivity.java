@@ -24,8 +24,6 @@ public class SplashActivity extends AppCompatActivity {
     //create a list based on database menu
     public static List<String> menuList = new ArrayList<>();
 
-    //connect to firebase
-    //private FirebaseFirestore firestore;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,9 +72,4 @@ public class SplashActivity extends AppCompatActivity {
         }).start();
     }
 
-    private void loadData() {
-        //menuList.clear();
-        //firestore.collection("MENU").document()
-        //firestore.collection("MENU").document().collection().document()
-    }
 }

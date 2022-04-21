@@ -47,7 +47,9 @@ public class DbQuery {
     /* Default user response value */
     public static final double DEFAULT_VALUE = -100.0;
 
-
+    /**
+     * Generates user data to put into the firebase database
+     */
     public static void createUserData(String email, String name, CompleteListener cl) {
         //researched here: https://firebase.google.com/docs/firestore/manage-data/transactions
 
@@ -96,6 +98,9 @@ public class DbQuery {
                 });
     }
 
+    /**
+     * Loads quotes into the program to use in quoteActivity
+     */
     public static void loadQuotes(CompleteListener completeListener) {
         //clear and load the default response list
         globalResponseList.clear();
@@ -177,6 +182,9 @@ public class DbQuery {
 
     }
 
+    /**
+     * Adds responses to the database
+     */
     public static void addResponse(int quoteNum, int responseNum, CompleteListener completeListener) {
         //path to response:
 
@@ -305,7 +313,11 @@ public class DbQuery {
                 });
     }
 
-
+    /**
+     * This is currently not used but will be implemented
+     * This will load user data from firebase and use it to compare against
+     * the current survey they are taking
+     */
     public static void loadPreviousData(CompleteListener completeListener) {
 
         globalPreviousResponses = new ArrayList<>();

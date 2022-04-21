@@ -32,12 +32,12 @@
                 android:id="@+id/finalscore_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/design_default_color_primary"
+                android:background="@drawable/gradient_background"
                 android:gravity="center"
                 android:padding="8dp"
                 android:text="FINAL RESULTS"
                 android:textColor="@color/white"
-                android:textSize="22sp"
+                android:textSize="25sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -91,7 +91,7 @@
             android:text="Authoritarian"
             android:textAlignment="center"
             android:layout_marginHorizontal="153dp"
-            android:layout_marginVertical="243dp"
+            android:layout_marginVertical="245dp"
             android:textSize="16sp" />
 
         <TextView
@@ -101,7 +101,7 @@
             android:text="Libertarian"
             android:textAlignment="center"
             android:layout_marginHorizontal="153dp"
-            android:layout_marginVertical="563dp"
+            android:layout_marginVertical="566dp"
             android:textSize="16sp" />
 
         <TextView
@@ -109,7 +109,7 @@
             android:layout_width="50dp"
             android:layout_height="40dp"
             android:text="Right"
-            android:layout_marginHorizontal="355dp"
+            android:layout_marginHorizontal="357dp"
             android:layout_marginVertical="405dp"
             android:textSize="16sp" />
 
@@ -117,7 +117,7 @@
             android:id="@+id/leftwingtext"
             android:layout_width="100dp"
             android:layout_height="40dp"
-            android:layout_marginHorizontal="16dp"
+            android:layout_marginHorizontal="18dp"
             android:layout_marginVertical="405dp"
             android:text="Left"
             android:textSize="16sp" />

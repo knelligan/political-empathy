@@ -17,9 +17,10 @@
             android:id="@+id/titlecompareresults"
             android:layout_width="match_parent"
             android:layout_height="60dp"
-            android:background="@color/design_default_color_primary"
+
+            android:background="@drawable/gradient_background"
             android:fontFamily="@font/barlowboldx"
-            android:paddingTop="15dp"
+            android:paddingTop="13dp"
             android:text="COMPARE RESULTS"
             android:textAlignment="center"
             android:textColor="@color/white"
@@ -29,8 +30,9 @@
             android:id="@+id/spinner1"
             android:layout_width="match_parent"
 
-            android:textSize="20sp"
-            android:layout_height="40dp" />
+            android:layout_height="48dp"
+            android:contentDescription="@android:string/dialog_alert_title"
+            android:textSize="20sp" />
         <Space
             android:layout_width="match_parent"
             android:layout_height="15dp" />
@@ -136,11 +138,13 @@
         </androidx.cardview.widget.CardView>
         <Space
             android:layout_width="match_parent"
-            android:layout_height="15dp" />
+            android:layout_height="35dp" />
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="horizontal">
+
+
 
             <Button
                 android:id="@+id/takeagaincompare"

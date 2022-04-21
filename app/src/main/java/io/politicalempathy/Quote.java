@@ -11,7 +11,10 @@ public class Quote {
 
 
 
-    //creates a quote object used to display on each quote activity screen
+
+    /**
+     * Creates a quote object used to display on each quote activity screen
+     */
     public Quote(String quoteID, String quoteText, String type, String author, String bias, double quoteValue, String job) {
 
         //the id in firebase associated with the quote"
@@ -34,7 +37,7 @@ public class Quote {
 
         //quote author's job
         this.job = job;
-        
+
 
     }
 

@@ -117,7 +117,6 @@ public class CalcActivity extends AppCompatActivity {
 
 
         //researched plotting values here: https://programmerworld.co/android/how-to-plot-arrays-x-and-y-coordinates-on-axes-in-your-android-app-without-using-dependencies-or-libraries/
-
         //TextView value updates
         econScore = findViewById(R.id.economic_bias_score);
         socScore = findViewById(R.id.social_bias_score);
@@ -138,6 +137,9 @@ public class CalcActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * Calculates economic and social score based on all user input
+     */
     public void scoreCalculations() {
         //get the current response in the list
         Response response;
@@ -165,41 +167,33 @@ public class CalcActivity extends AppCompatActivity {
                 socTotal += response.getResponseValue();
             }
         }
-        //here is where i will store the econ/soc in user class----------------------------------------------------------------------------------------------
+
         //calculate econ score by finding the average of the
         //economic responses
         double avgEcon = Math.round(econTotal / econCount);
-        //LoginActivity.currentlyLoggedInUser.setEconScore(avgEcon);
-
 
         //calculate the social score by finding the average of
         //the social responses
         double avgSoc = Math.round(socTotal / socCount);
-        //LoginActivity.currentlyLoggedInUser.setSocialScore(avgSoc);
-
 
         //cast the score value to int to make the score easier to understand/read
         econScoreValue = (int) avgEcon;
-        //set the global econ
+
+        //set the global econ score
         DbQuery.globalEconScore = econScoreValue;
 
+        //cast the score to int to make it shorter/easier
         socScoreValue = (int) avgSoc;
-        //set the global soc
-        DbQuery.globalSocScore = socScoreValue;
 
+        //set the global soc score
+        DbQuery.globalSocScore = socScoreValue;
 
     }
 
-
+    /**
+     * Plots the value of the x,y point onto the bitmap
+     */
     public void plotValue() {
-        //this needs to be updated/replaced with scores from db-------------------------------------------------------
-        //calculate the average of the econ scores
-        //x = econ
-        //econScoreValue = -3;
-
-        //calculate the average of the social scores------------------------------------
-        //y = soc
-        //socScoreValue = 7;
 
         //researched bitmap info here: https://itecnote.com/tecnote/android-getting-bitmap-from-custom-surfaceview/
         //create the bitmap used for plotting
@@ -273,7 +267,6 @@ public class CalcActivity extends AppCompatActivity {
 
         //generate center points on the canvas to start from
         Point plotPoint = translatePoint(econScoreValue, socScoreValue);
-        //Point plotPoint = new Point(7,15);
 
         //get translated point values
         int x = plotPoint.x;
@@ -283,16 +276,42 @@ public class CalcActivity extends AppCompatActivity {
         //draw point method researched here: https://www.tabnine.com/code/java/methods/android.graphics.Canvas/drawPoint
         canvas.drawPoint(x, y, paint);
 
-
         //compass is the imageview
         compass.setImageBitmap(bitmap);
 
+        //set up text display
+        String econText = "Economic Bias ";
+        String socText = "Social Bias ";
+
+        //note in top score the user economic alignment
+        if(econScoreValue< 0){
+            econText += "(Left): ";
+        }else if(econScoreValue > 0){
+            econText += "(Right): ";
+        }else{
+            econText += "(Even): ";
+        }
+
+        //note in top score the user social alignment
+        if(socScoreValue< 0){
+            socText += "(Libertarian): ";
+        }else if(econScoreValue > 0){
+            socText += "(Authoritarian): ";
+        }else{
+            socText += "(Even): ";
+        }
 
         //show score values in textView
-        econScore.setText("Economic Bias:  " + econScoreValue);
-        socScore.setText("Social Bias:         " + socScoreValue);
+        econScore.setText(econText + econScoreValue);
+        socScore.setText(socText + socScoreValue);
+
+        //econScore.setText("Economic Bias:  " + econScoreValue);
+        //socScore.setText("Social Bias:         " + socScoreValue);
     }
 
+    /**
+     * Moves the point based on a provided x,y value
+     */
     public Point translatePoint(int x, int y) {
 
         //the point starts (0, 0) in the upper left corner.
@@ -330,6 +349,11 @@ public class CalcActivity extends AppCompatActivity {
         return new Point(x, y);
     }
 
+    /**
+     * Creates a brief summary of results based on the user's responses
+     * the summary notes the intensity or extremity of political alignment
+     * based on how close it falls to -10 or +10.
+     */
     public void writeSummaryResults() {
         boolean econModerate;
         boolean socialModerate;
@@ -422,7 +446,9 @@ public class CalcActivity extends AppCompatActivity {
 
     }
 
-
+    /**
+     * Creates a popup dialog that asks the user to share their results online
+     */
     private void dialogShareRequest() {
         //researched this here: https://stackoverflow.com/questions/2478517/how-to-display-a-yes-no-dialog-box-on-android
 
@@ -469,9 +495,12 @@ public class CalcActivity extends AppCompatActivity {
         alert.show();
     }
 
+    /**
+     * Shares results from the survey.
+     */
     private void shareResults() {
         //researched here: https://stackoverflow.com/questions/30196965/how-to-take-a-screenshot-of-a-current-activity-and-then-share-it
-//researched here: https://www.includehelp.com/android/share-something-on-social-media.aspx
+    //researched here: https://www.includehelp.com/android/share-something-on-social-media.aspx
 
         Context cardviewContext = resultsView.getContext();
 
@@ -489,39 +518,3 @@ public class CalcActivity extends AppCompatActivity {
     }
 }
 
-//
-////        Bitmap bitmap = Bitmap.createBitmap(resultsView.getWidth(), resultsView.getHeight(),
-////                Bitmap.Config.ARGB_8888);
-////        if (resultsView instanceof CardView) {
-////            bitmap = ((CardView) resultsView).getBitmap();
-////        } else {
-////            Canvas c = new Canvas(bitmap);
-////            resultsView.draw(c);
-////        }
-//
-//        //new Share(cardviewContext).shareIntent(cardBitMap, "msg", "randomstring");
-//
-//    }
-//
-////    public static Bitmap getBitmapFromView(View view) {
-//////        view.measure(View.MeasureSpec.UNSPECIFIED, View.MeasureSpec.UNSPECIFIED);
-//////        Bitmap bitmap = Bitmap.createBitmap(view.getMeasuredWidth(), view.getMeasuredHeight(),
-//////                Bitmap.Config.ARGB_8888);
-//////        Canvas canvas = new Canvas(bitmap);
-//////        view.layout(0, 0, view.getMeasuredWidth(), view.getMeasuredHeight());
-//////        view.draw(canvas);
-//////        return bitmap;
-////
-//////researched here: https://stackoverflow.com/questions/61308719/converting-a-cardview-to-an-image-bitmap
-////        int totalHeight = view.getHeight();
-////        int totalWidth = view.getWidth();
-////        float percent = 0.7f;//use this value to scale bitmap to specific size
-////
-////        Bitmap canvasBitmap = Bitmap.createBitmap(totalWidth,totalHeight, Bitmap.Config.ARGB_8888);
-////        Canvas canvas = new Canvas(canvasBitmap);
-////        canvas.scale(percent, percent);
-////        view.draw(canvas);
-////
-////        return canvasBitmap;
-////    }
-//}

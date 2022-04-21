@@ -78,7 +78,18 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         }
     }
 
+    /**
+     * Login method to take input text and do basic data validation and then
+     * log in the user if they meet the criteria or provide feedback if
+     * more information needs to be added.
+     *
+     * This uses firebase authentication
+     */
     private void userLogin() {
+        //researched here: https://www.geeksforgeeks.org/user-authentication-using-firebase-in-android/
+        //researched here: https://medium.com/swlh/email-and-password-authentication-using-firebase-in-android-studio-java-9a57156f04fc
+        //researched here: https://www.javatpoint.com/android-firebase-authentication-google-login
+
         //create strings from user input & trim extraneous spaces
         String email = editEmail.getText().toString().trim();
         String password = editPassword.getText().toString().trim();

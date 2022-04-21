@@ -66,6 +66,14 @@ public class RegisterUserActivity extends AppCompatActivity implements View.OnCl
         }
     }
 
+    /**
+     * User registration method that takes in text and does basic error checking
+     * and provides user feedback if information was not entered in the
+     * correct feedback. Upon completion the information is loaded into
+     * firebase.
+     *
+     * This uses firebase authentication and realtime database for storage
+     */
     private void registerUser() {
         //create strings from user input & trim extraneous spaces
         String name = editFullName.getText().toString().trim();

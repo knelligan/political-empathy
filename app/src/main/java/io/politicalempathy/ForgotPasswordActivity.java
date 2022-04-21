@@ -58,8 +58,12 @@ public class ForgotPasswordActivity extends AppCompatActivity {
 
 
     }
-
+    /**
+     * Resets the user password
+     */
     private void resetPassword() {
+
+
         //create strings from user input & trim extraneous spaces
         String email = editEmail.getText().toString().trim();
 
@@ -72,6 +76,7 @@ public class ForgotPasswordActivity extends AppCompatActivity {
         }
 
         //check that email address is in a valid format
+        //researched here: https://www.programcreek.com/java-api-examples/?class=android.util.Patterns&method=EMAIL_ADDRESS
         if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
             //if email field is empty, provide error feedback
             editEmail.setError("Email format is invalid!");
@@ -81,6 +86,7 @@ public class ForgotPasswordActivity extends AppCompatActivity {
         }
 
         //send an email reset
+        //researched here: https://stackoverflow.com/questions/42800349/forgot-password-in-firebase-for-android
         auth.sendPasswordResetEmail(email).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {

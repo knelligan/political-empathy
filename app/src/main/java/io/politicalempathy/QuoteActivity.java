@@ -23,8 +23,6 @@ public class QuoteActivity extends AppCompatActivity implements View.OnClickList
 
 
     //current number of the quote being displayed in the series
-    //private int quoteCounter;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,11 +54,12 @@ public class QuoteActivity extends AppCompatActivity implements View.OnClickList
 
     }
 
-
+    /**
+     * Ses the quote displayed to the currently selected quote
+     * in the array.
+     */
     private void setQuote() {
         //set the quotes to the current quote counter
-//        quoteNum.setText(DbQuery.globalQuoteList.get(DbQuery.globalQuoteCounter).getQuoteID());
-//        quoteText.setText(DbQuery.globalQuoteList.get(DbQuery.globalQuoteCounter).getQuoteText());
 
         if (DbQuery.globalQuoteCounter < DbQuery.globalQuoteList.size()) {
             System.out.println("quote counter is: " + DbQuery.globalQuoteCounter + " quotelistsize: " + DbQuery.globalQuoteList.size());
@@ -80,8 +79,15 @@ public class QuoteActivity extends AppCompatActivity implements View.OnClickList
         }
     }
 
+    /**
+     * Detects which button is clicked and passes to the
+     * save choice method
+     */
     @Override
     public void onClick(View view) {
+        //if the user clicks on one of the choices
+        //the selection is passed to the save choice method
+        //save choice enters it in the database
         int selection = 0;
         switch (view.getId()) {
             case R.id.stronglyagree1aa:
@@ -102,10 +108,12 @@ public class QuoteActivity extends AppCompatActivity implements View.OnClickList
         System.out.println("agree/disagree button click method working");
 
         //make a call to savechoice to save the user's survey response
-
         saveChoice(selection);
     }
 
+    /**
+     * Saves the user choice to the database
+     */
     private void saveChoice(int userChoice) {
 
         System.out.println("savechoice method working");
@@ -140,6 +148,9 @@ public class QuoteActivity extends AppCompatActivity implements View.OnClickList
         displayAuthor();
     }
 
+    /**
+     * Displays the author after the user selects whether they agree or disagree with the quote
+     */
     private void displayAuthor() {
         Intent intent = new Intent(QuoteActivity.this, AuthorActivity.class);
         startActivity(intent);

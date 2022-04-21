@@ -27,7 +27,7 @@
             android:text="@string/quote_1"
             android:background="@color/darkgray"
             android:textColor="@color/white"
-            android:textSize="22sp"
+            android:textSize="30sp"
             android:textStyle="bold" />
 
 
